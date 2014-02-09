@@ -10,8 +10,12 @@ module.exports = function (grunt) {
 
         uglify: {
             options: {
-                banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' + '<%= grunt.template.today("yyyy-mm-dd") %>\n' + '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' + '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' + ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
-                mangle: true //false
+                banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - '
+                    + '<%= grunt.template.today("yyyy-mm-dd") %>\n'
+                    + '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>'
+                    + '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;'
+                    + ' Licensed <%= pkg.license %> */\n',
+                mangle: true
             },
             build: {
                 files: {
@@ -20,6 +24,11 @@ module.exports = function (grunt) {
                 }
             },
             dest: {
+                options:{
+                    sourceMapRoot: '../',
+                    sourceMap: 'build/js/index.min.js.map',
+                    sourceMapUrl: 'build/js/index.min.js.map'
+                },
                 files: {
                     'build/js/index.min.js': ['assets/js/getCookie.js', 'assets/js/sayGrunt.js']
                 }
