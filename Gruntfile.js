@@ -159,6 +159,9 @@ module.exports = function (grunt) {
                 }
             }
         },
+        qunit: {
+            files: ['test/*.html']
+        },
         watch: {
             options: {
                 livereload: true
