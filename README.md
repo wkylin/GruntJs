@@ -1,6 +1,9 @@
 GruntJs
 =======
 
-GruntJs----自动化的项目构建工具
+GruntJs----基于Node.js的自动化构建工具
 
-<http://wkylin.github.io/assets/GruntJsPpt/gruntJs.html/>
+
+在线演示文档：
+
+<http://wkylin.github.io/assets/GruntJsPpt/gruntJs.html>
