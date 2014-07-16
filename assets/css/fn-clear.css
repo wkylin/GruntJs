@@ -1,39 +1,37 @@
 /**
  * @author:wkylin [wkylin@github.io]
- * @name: im-talk
- * @overview:
+ * @name: fn-clear
+ * @overview: 清理浮动
  * @require: null
  */
-/* 清理浮动 */
-.fn-clear:after
-{
+
+.fn-clear:after {
     display: block;
     height: 0;
-    clear: both;
+    clear: both;
+
     font-size: 0;
     visibility: hidden;
     content: ' ';
 }
 
-.fn-clear
-{
+.fn-clear {
     zoom: 1; /* for IE6 IE7 */
 }
 
 /* grunt box */
 
-.grunt-box
-{
+.grunt-box {
     width: 400px;
     height: 30px;
-    margin: 50px auto;
+    margin: 50px auto;
+
     line-height: 30px;
     text-align: center;
     cursor: pointer;
 }
 
-.text-color
-{
+.text-color {
     color: #fff;
     background-color: #010;
     /*color:#fff;*/
