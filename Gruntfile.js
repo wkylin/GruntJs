@@ -1,12 +1,32 @@
 module.exports = function (grunt) {
 
     //使用 matchdep，可以自动载入所有任务。
-    require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
+   // require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
+    require('load-grunt-tasks')(grunt);
+
+    require('time-grunt')(grunt);
     // 构建任务配置
     grunt.initConfig({
+
+        //默认文件目录在这里
+        paths:{
+            assets:'assets',//输出的最终文件assets里面
+            less:'assets/css/less',//推荐使用Less
+            css:'assets/css', //若简单项目，可直接使用原生CSS，同样可以grunt watch:base进行监控
+            js:'assets/js', //js文件相关目录
+            img:'assets/image' //图片相关
+        },
+        buildPaths:{
+            build:'build',
+            css:'build/css',
+            js:'build/js',
+            img:'build/image'
+        },
+        buildType:'Build',
         //读取package.json的内容，形成个json数据
         pkg: grunt.file.readJSON('package.json'),
+        archive: grunt.option('name') || 'GruntJs',//此处可根据自己的需求修改
 
         uglify: {
             options: {
@@ -19,57 +39,87 @@ module.exports = function (grunt) {
             },
             build: {
                 files: {
-                    'build/js/getCookie.min.js': ['assets/js/getCookie.js'],
-                    'build/js/sayGrunt.min.js': ['assets/js/sayGrunt.js']
+                    '<%= buildPaths.js %>/getCookie.min.js': ['<%= paths.js %>/getCookie.js'],
+                    '<%= buildPaths.js %>/docApp.min.js': ['<%= paths.js %>/docApp.js']
                 }
             },
             dest: {
                 options:{
                     sourceMapRoot: '../',
-                    sourceMap: 'build/js/index.min.js.map',
-                    sourceMapUrl: 'build/js/index.min.js.map'
+                    sourceMap: '<%= buildPaths.js %>/index.min.js.map',
+                    sourceMapUrl: '<%= buildPaths.js %>/index.min.js.map'
                 },
                 files: {
-                    'build/js/index.min.js': ['assets/js/getCookie.js', 'assets/js/sayGrunt.js']
+                    '<%= buildPaths.js %>/index.min.js': ['<%= paths.js %>/getCookie.js', '<%= paths.js %>/docApp.js']
                 }
             }
         },
         cssmin: {
             build: {
                 options: {
-                    banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+                    banner: '/*! <%= grunt.template.today("yyyy-mm-dd") %>'+ ' Licensed <%= pkg.license %> */\n',
+                    beautify: {
+                        //中文ascii化，非常有用！防止中文乱码的神配置
+                       ascii_only: true
+                     }
                 },
-                //src: 'assets/css/base.css',
-                //dest: 'build/css/base.min.css'
+                //src: '<%= paths.css %>/base.css',
+                //dest: '<%= buildPaths.css %>/base.min.css'
                 files: {
-                    'build/css/base.min.css': 'assets/css/base.css',
-                    'build/css/fixclear.min.css': 'assets/css/fixclear.css',
-                    'build/css/source.min.css': 'assets/css/source.css'
+                    '<%= buildPaths.css %>/base.min.css': '<%= paths.css %>/base.css',
+                    '<%= buildPaths.css %>/fn-clear.min.css': '<%= paths.css %>/fn-clear.css',
+                    '<%= buildPaths.css %>/source.min.css': '<%= paths.css %>/source.css'
                 }
                 //files: [
-                //{src: ['assets/css/base.css', 'assets/css/fixclear.css'], dest: 'build/css/i.min.css'}
+                //{src: ['<%= paths.css %>/base.css', '<%= paths.css %>/fn-clear.css'], dest: '<%= buildPaths.css %>/i.min.css'}
                 //]
             }
         },
         clean: {
             build: {
-                src: [ 'build/js', 'build/css', 'build/image' ]
-            }
+                src: [ 'build/' ]
+            },
+            delDoc: {
+                src: [ 'docs/' ]
+            },
+            delCss:{
+                src:['<%= buildPaths.css %>']
+            },
+            delJs:{
+                src:['<%= buildPaths.js %>']
+            },
+            delHtml:{
+                src:['<%= buildPaths.html %>']
+            },
+            delZip: ['<%= archive %>*.zip'] //先删除先前生成的压缩包
         },
         concat: {
             build: {
                 options: {
                     separator: '\n'
                 },
-                src: [ 'assets/js/*.js' ],
-                dest: 'build/js/concatIndex.js'
+                src: [ '<%= paths.js %>/*.js' ],
+                dest: '<%= buildPaths.js %>/concatIndex.js'
             }
         },
         copy: {
-            build: {
-                files: {
-                    'build/index.html': 'assets/grunt.html'
-                }
+            main:{
+                files:[
+                    {expand: true, src: ['<%= paths.assets %>/*.html'], dest: 'build/'},
+                    {expand: true, src: ['<%= paths.css %>/*.css'], dest: 'build/'},
+                    {expand: true, src: ['<%= paths.img %>/**'], dest: 'build/'},
+                    {expand: true, src: ['<%= paths.js %>/**'], dest: 'build/'},
+                    {expand: true, src: ['*','!build','!test', '!.gitignore', '!.DS_Store','!Gruntfile.js','!package.json','!node_modules/**','!go.sh','!.ftppass','!<%= archive %>*.zip'], dest: 'build/'}
+                ]
+            },
+
+            images:{
+                expand: true,
+                cwd:'<%= paths.img %>',
+                src: ['**','!github.png'],
+                dest: '<%= buildPaths.img %>',
+                flatten:true,
+                filter:'isFile'
             }
         },
         htmlmin: {
@@ -78,23 +128,33 @@ module.exports = function (grunt) {
                     removeComments: true,
                     collapseWhitespace: true
                 },
-                files: {
-                    'build/grunt.html': 'assets/grunt.html'
-                }
+
+                files: [{
+                    expand: true,
+                    cwd: '<%= paths.assets %>',
+                    src: ['**/*.html'],
+                    dest: '<%= buildPaths.build %>'
+                }]
             }
         },
-        imagemin: {
+       imagemin: {
             build: {
                 options: {
-                    optimizationLevel: 3
+                    optimizationLevel: 4
                 },
-                files: {
+                /*files: {
                     'build/image/a.png': 'assets/image/a.png',
                     'build/image/b.png': 'assets/image/b.png',
                     'build/image/c.png': 'assets/image/c.png'
-                }
+                }*/
+                files: [{
+                    expand: true,
+                    cwd: '<%= paths.img %>',
+                    src: ['**/*.{jpg,png,gif}'],
+                    dest: '<%= buildPaths.img %>'
+                }]
             }
-        },
+        }, 
         jshint: {
             options: {
                 curly: true,
@@ -109,27 +169,40 @@ module.exports = function (grunt) {
             globals: {
                 exports: true
             },
-            files: ['assets/js/*.js']
+            files: ['<%= paths.js %>/*.js']
         },
         less: {
-            development: {
-                options: {
-                    paths: ["assets/css"]
+            build: {
+                options:{
+                    compress: true,
+                    optimization: 2,
+                    banner: '/*! <%= grunt.template.today("yyyy-mm-dd") %>'+ ' Licensed <%= pkg.license %> */\n'
+                    //cleancss: true,
+                    //sourceMap: true,
+                    //sourceMapFilename: "<%= paths.css %>/source.map",
+                    //sourceMapBasepath: "<%= paths.css %>"
                 },
-                files: {
-                    "assets/css/source.css": "assets/css/source.less"
-                }
+//                files:{
+//                    '<%= paths.css %>/source.css':['<%= paths.less %>/source.less','<%= paths.less %>/source2.less']
+//                },
+                files: [{
+                    expand: true,
+                    cwd: "<%= paths.less %>",
+                    src: ["**/*.less"],
+                    dest: "<%= paths.css %>",
+                    ext: ".css"
+                }]
             }
         },
         compress: {
             main: {
-                options: {
-                    archive: 'archive.zip'
+                options:{
+                    archive:'<%= archive %>-<%= grunt.template.today("yyyy") %>年<%= grunt.template.today("mm") %>月<%= grunt.template.today("dd") %>日<%= grunt.template.today("h") %>时<%= grunt.template.today("TT") %>.zip'
                 },
-                files: [
-                    {src: 'build/css/*', dest: 'build/css', filter: 'isFile'},
-                    {src: 'build/**', dest: 'build/'}
-                ]
+                expand:true,
+                cwd:'build/',
+                src:['**/*'],
+                dest:''
             }
         },
         //grunt-cssc整合CSS文件样式规则，最大限度削减重复内容
@@ -141,10 +214,26 @@ module.exports = function (grunt) {
                     consolidateMediaQueries: true
                 },
                 files: {
-                    'build/css/source.css': 'assets/css/source.css'
+                    '<% paths.css %>/source.css': '<%= paths.css %>/source.css'
                 }
             }
         },
+
+        //按照预定义的排序格式重新排列CSS中定义的属性
+        csscomb: {
+            options: {
+                config: 'assets/js/libs/csscomb.json'
+            },
+            files: {
+                expand: true,
+                cwd: 'assets/css/',
+                src: ['**/*.css'],
+                dest: 'assets/css/',
+                ext: '.css'
+            }
+        },
+
+
         // 通过connect任务，创建一个静态服务器
         connect: {
             server: {
@@ -156,6 +245,45 @@ module.exports = function (grunt) {
                     // 物理路径(默认为. 即根目录)
                     base: '.',
                     livereload: true
+                }
+            }
+        },
+
+        yuidoc: {
+            compile: {
+                options: {
+                    paths: '<%= paths.js %>/',
+                    themedir: 'theme/',
+                    outdir: 'docs/'
+                }
+            }
+        },
+        requirejs: {
+            build: {
+                options: {
+                    appDir: 'assets',
+                    baseUrl: 'js',
+                    dir: 'build',
+                    /*optimize: 'uglify2',
+                     generateSourceMaps: false,
+                     preserveLicenseComments: false,
+                     useSourceUrl: true,*/
+                    optimizeCss: 'standard',
+                    paths: {
+                        'jquery': 'libs/jquery-1.8.2',
+                        'a': 'utils/a',
+                        'b': 'utils/b',
+                        'c': 'utils/c',
+                        'd': 'utils/d',
+                        'e': 'utils/e',
+                        'main': 'app/main'
+                    },
+                    shim: {
+
+                    },
+                    modules: [{
+                        name: 'main'
+                    }]
                 }
             }
         },
