@@ -35,12 +35,14 @@ module.exports = function (grunt) {
                     + '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>'
                     + '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;'
                     + ' Licensed <%= pkg.license %> */\n',
-                mangle: true
+                mangle: true,
+                beautify: true
             },
             build: {
                 files: {
                     '<%= buildPaths.js %>/getCookie.min.js': ['<%= paths.js %>/getCookie.js'],
-                    '<%= buildPaths.js %>/docApp.min.js': ['<%= paths.js %>/docApp.js']
+                    '<%= buildPaths.js %>/docApp.min.js': ['<%= paths.js %>/docApp.js'],
+                    '<%= buildPaths.js %>/domready.js': ['<%= paths.js %>/utils/domready.js']
                 }
             },
             dest: {
