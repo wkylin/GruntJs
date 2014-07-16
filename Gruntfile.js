@@ -42,7 +42,7 @@ module.exports = function (grunt) {
                 files: {
                     '<%= buildPaths.js %>/getCookie.min.js': ['<%= paths.js %>/getCookie.js'],
                     '<%= buildPaths.js %>/docApp.min.js': ['<%= paths.js %>/docApp.js'],
-                    '<%= buildPaths.js %>/domready.js': ['<%= paths.js %>/utils/domready.js']
+                    '<%= buildPaths.js %>/require.js': ['<%= paths.js %>/libs/require.js']
                 }
             },
             dest: {
