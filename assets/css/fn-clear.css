@@ -1,0 +1,42 @@
+/**
+ * @author:wkylin [wkylin@github.io]
+ * @name: im-talk
+ * @overview:
+ * @require: null
+ */
+/* 清理浮动 */
+.fn-clear:after
+{
+    display: block;
+    height: 0;
+    clear: both;
+    font-size: 0;
+    visibility: hidden;
+    content: ' ';
+}
+
+.fn-clear
+{
+    zoom: 1; /* for IE6 IE7 */
+}
+
+/* grunt box */
+
+.grunt-box
+{
+    width: 400px;
+    height: 30px;
+    margin: 50px auto;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.text-color
+{
+    color: #fff;
+    background-color: #010;
+    /*color:#fff;*/
+    /*background-color:#008c96;*/
+}
+
