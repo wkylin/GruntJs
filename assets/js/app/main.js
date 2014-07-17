@@ -3,7 +3,8 @@ requirejs.config({
     baseUrl: './js',
     paths: {
         'jquery': 'libs/jquery-1.8.2.min',
-        'beta':'utils/jquery.beta',//shim
+        'beta':'utils/jquery.beta',
+        'alpha':'utils/jquery.alpha',
         'a': 'utils/a',
         'b': 'utils/b',
         'c': 'utils/c',
@@ -21,7 +22,7 @@ requirejs.config({
         'beta':{
             deps:['jquery']
         },
-        'jquery.alpha':{
+        'alpha':{
             deps:['jquery']
         }
     }

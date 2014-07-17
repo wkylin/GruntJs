@@ -234,7 +234,18 @@ module.exports = function (grunt) {
                 ext: '.css'
             }
         },
-
+        uncss:{
+          dist:{
+              options:{
+                  csspath: 'css/',
+                  stylesheets: ['base.css', 'fn-clear.css'],
+                  report : 'min'
+              },
+              files: {
+                  '<%= paths.css %>/tidy.css': ['<%= paths.assets %>/grunt.html', '<%= paths.assets %>/requirejs.html']
+              }
+          }
+        },
 
         // 通过connect任务，创建一个静态服务器
         connect: {
@@ -272,12 +283,17 @@ module.exports = function (grunt) {
                      useSourceUrl: true,*/
                     optimizeCss: 'standard',
                     paths: {
-                        'jquery': 'libs/jquery-1.8.2',
+                        'jquery': 'libs/jquery-1.8.2.min',
                         'a': 'utils/a',
                         'b': 'utils/b',
                         'c': 'utils/c',
                         'd': 'utils/d',
                         'e': 'utils/e',
+                        'f': 'utils/f',
+                        'alpha': 'utils/jquery.alpha',
+                        'beta': 'utils/jquery.beta',
+                        'domready': 'utils/domready',
+                        'math': 'utils/math',
                         'main': 'app/main'
                     },
                     shim: {
