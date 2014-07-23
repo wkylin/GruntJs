@@ -36,7 +36,7 @@ module.exports = function (grunt) {
                     + '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;'
                     + ' Licensed <%= pkg.license %> */\n',
                 mangle: true,
-                beautify: true
+                beautify: false
             },
             build: {
                 files: {

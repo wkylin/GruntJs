@@ -17,3 +17,11 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+(function(){
+    $(".sbar_oper li").hover(function(){
+        $(this).addClass("curr");
+    },function(){
+        $(this).removeClass("curr");
+    });
+})();
