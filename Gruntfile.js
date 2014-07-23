@@ -28,6 +28,11 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
         archive: grunt.option('name') || 'GruntJs',//此处可根据自己的需求修改
 
+        jsonlint:{
+            sample: {
+                src: [ '<%= paths.js %>/json/lint.json' ]
+            }
+        },
         uglify: {
             options: {
                 banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - '
