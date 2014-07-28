@@ -251,7 +251,19 @@ module.exports = function (grunt) {
               }
           }
         },
-
+        rev: {
+            options: {
+                algorithm: 'md5',
+                length: 8
+            },
+            assets: {
+                files: [{
+                    src: [
+                        '<%= paths.img %>/**/*.{jpg,jpeg,gif,png}'
+                    ]
+                }]
+            }
+        },
         // 通过connect任务，创建一个静态服务器
         connect: {
             server: {
