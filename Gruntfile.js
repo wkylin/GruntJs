@@ -1,7 +1,7 @@
 module.exports = function (grunt) {
 
     //使用 matchdep，可以自动载入所有任务。
-   // require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
+    // require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
 
     require('load-grunt-tasks')(grunt);
 
@@ -10,25 +10,25 @@ module.exports = function (grunt) {
     grunt.initConfig({
 
         //默认文件目录在这里
-        paths:{
-            assets:'assets',//输出的最终文件assets里面
-            less:'assets/css/less',//推荐使用Less
-            css:'assets/css', //若简单项目，可直接使用原生CSS，同样可以grunt watch:base进行监控
-            js:'assets/js', //js文件相关目录
-            img:'assets/image' //图片相关
+        paths: {
+            assets: 'assets',//输出的最终文件assets里面
+            less: 'assets/css/less',//推荐使用Less
+            css: 'assets/css', //若简单项目，可直接使用原生CSS，同样可以grunt watch:base进行监控
+            js: 'assets/js', //js文件相关目录
+            img: 'assets/image' //图片相关
         },
-        buildPaths:{
-            build:'build',
-            css:'build/css',
-            js:'build/js',
-            img:'build/image'
+        buildPaths: {
+            build: 'build',
+            css: 'build/css',
+            js: 'build/js',
+            img: 'build/image'
         },
-        buildType:'Build',
+        buildType: 'Build',
         //读取package.json的内容，形成个json数据
         pkg: grunt.file.readJSON('package.json'),
         archive: grunt.option('name') || 'GruntJs',//此处可根据自己的需求修改
 
-        jsonlint:{
+        jsonlint: {
             sample: {
                 src: [ '<%= paths.js %>/json/lint.json' ]
             }
@@ -51,7 +51,7 @@ module.exports = function (grunt) {
                 }
             },
             dest: {
-                options:{
+                options: {
                     sourceMapRoot: '../',
                     sourceMap: '<%= buildPaths.js %>/index.min.js.map',
                     sourceMapUrl: '<%= buildPaths.js %>/index.min.js.map'
@@ -64,11 +64,11 @@ module.exports = function (grunt) {
         cssmin: {
             build: {
                 options: {
-                    banner: '/*! <%= grunt.template.today("yyyy-mm-dd") %>'+ ' Licensed <%= pkg.license %> */\n',
+                    banner: '/*! <%= grunt.template.today("yyyy-mm-dd") %>' + ' Licensed <%= pkg.license %> */\n',
                     beautify: {
                         //中文ascii化，非常有用！防止中文乱码的神配置
-                       ascii_only: true
-                     }
+                        ascii_only: true
+                    }
                 },
                 //src: '<%= paths.css %>/base.css',
                 //dest: '<%= buildPaths.css %>/base.min.css'
@@ -89,14 +89,14 @@ module.exports = function (grunt) {
             delDoc: {
                 src: [ 'docs/' ]
             },
-            delCss:{
-                src:['<%= buildPaths.css %>']
+            delCss: {
+                src: ['<%= buildPaths.css %>']
             },
-            delJs:{
-                src:['<%= buildPaths.js %>']
+            delJs: {
+                src: ['<%= buildPaths.js %>']
             },
-            delHtml:{
-                src:['<%= buildPaths.html %>']
+            delHtml: {
+                src: ['<%= buildPaths.html %>']
             },
             delZip: ['<%= archive %>*.zip'] //先删除先前生成的压缩包
         },
@@ -110,23 +110,23 @@ module.exports = function (grunt) {
             }
         },
         copy: {
-            main:{
-                files:[
+            main: {
+                files: [
                     {expand: true, src: ['<%= paths.assets %>/*.html'], dest: 'build/'},
                     {expand: true, src: ['<%= paths.css %>/*.css'], dest: 'build/'},
                     {expand: true, src: ['<%= paths.img %>/**'], dest: 'build/'},
                     {expand: true, src: ['<%= paths.js %>/**'], dest: 'build/'},
-                    {expand: true, src: ['*','!build','!test', '!.gitignore', '!.DS_Store','!Gruntfile.js','!package.json','!node_modules/**','!go.sh','!.ftppass','!<%= archive %>*.zip'], dest: 'build/'}
+                    {expand: true, src: ['*', '!build', '!test', '!.gitignore', '!.DS_Store', '!Gruntfile.js', '!package.json', '!node_modules/**', '!go.sh', '!.ftppass', '!<%= archive %>*.zip'], dest: 'build/'}
                 ]
             },
 
-            images:{
+            images: {
                 expand: true,
-                cwd:'<%= paths.img %>',
-                src: ['**','!github.png'],
+                cwd: '<%= paths.img %>',
+                src: ['**', '!github.png'],
                 dest: '<%= buildPaths.img %>',
-                flatten:true,
-                filter:'isFile'
+                flatten: true,
+                filter: 'isFile'
             }
         },
         htmlmin: {
@@ -136,32 +136,36 @@ module.exports = function (grunt) {
                     collapseWhitespace: true
                 },
 
-                files: [{
-                    expand: true,
-                    cwd: '<%= paths.assets %>',
-                    src: ['**/*.html'],
-                    dest: '<%= buildPaths.build %>'
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= paths.assets %>',
+                        src: ['**/*.html'],
+                        dest: '<%= buildPaths.build %>'
+                    }
+                ]
             }
         },
-       imagemin: {
+        imagemin: {
             build: {
                 options: {
                     optimizationLevel: 4
                 },
                 /*files: {
-                    'build/image/a.png': 'assets/image/a.png',
-                    'build/image/b.png': 'assets/image/b.png',
-                    'build/image/c.png': 'assets/image/c.png'
-                }*/
-                files: [{
-                    expand: true,
-                    cwd: '<%= paths.img %>',
-                    src: ['**/*.{jpg,png,gif}'],
-                    dest: '<%= buildPaths.img %>'
-                }]
+                 'build/image/a.png': 'assets/image/a.png',
+                 'build/image/b.png': 'assets/image/b.png',
+                 'build/image/c.png': 'assets/image/c.png'
+                 }*/
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= paths.img %>',
+                        src: ['**/*.{jpg,png,gif}'],
+                        dest: '<%= buildPaths.img %>'
+                    }
+                ]
             }
-        }, 
+        },
         jshint: {
             options: {
                 curly: true,
@@ -180,10 +184,10 @@ module.exports = function (grunt) {
         },
         less: {
             build: {
-                options:{
+                options: {
                     compress: true,
                     optimization: 2,
-                    banner: '/*! <%= grunt.template.today("yyyy-mm-dd") %>'+ ' Licensed <%= pkg.license %> */\n'
+                    banner: '/*! <%= grunt.template.today("yyyy-mm-dd") %>' + ' Licensed <%= pkg.license %> */\n'
                     //cleancss: true,
                     //sourceMap: true,
                     //sourceMapFilename: "<%= paths.css %>/source.map",
@@ -192,24 +196,26 @@ module.exports = function (grunt) {
 //                files:{
 //                    '<%= paths.css %>/source.css':['<%= paths.less %>/source.less','<%= paths.less %>/source2.less']
 //                },
-                files: [{
-                    expand: true,
-                    cwd: "<%= paths.less %>",
-                    src: ["**/*.less"],
-                    dest: "<%= paths.css %>",
-                    ext: ".css"
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: "<%= paths.less %>",
+                        src: ["**/*.less"],
+                        dest: "<%= paths.css %>",
+                        ext: ".css"
+                    }
+                ]
             }
         },
         compress: {
             main: {
-                options:{
-                    archive:'<%= archive %>-<%= grunt.template.today("yyyy") %>年<%= grunt.template.today("mm") %>月<%= grunt.template.today("dd") %>日<%= grunt.template.today("h") %>时<%= grunt.template.today("TT") %>.zip'
+                options: {
+                    archive: '<%= archive %>-<%= grunt.template.today("yyyy") %>年<%= grunt.template.today("mm") %>月<%= grunt.template.today("dd") %>日<%= grunt.template.today("h") %>时<%= grunt.template.today("TT") %>.zip'
                 },
-                expand:true,
-                cwd:'build/',
-                src:['**/*'],
-                dest:''
+                expand: true,
+                cwd: 'build/',
+                src: ['**/*'],
+                dest: ''
             }
         },
         //grunt-cssc整合CSS文件样式规则，最大限度削减重复内容
@@ -239,17 +245,17 @@ module.exports = function (grunt) {
                 ext: '.css'
             }
         },
-        uncss:{
-          dist:{
-              options:{
-                  csspath: 'css/',
-                  stylesheets: ['base.css', 'fn-clear.css'],
-                  report : 'min'
-              },
-              files: {
-                  '<%= paths.css %>/tidy.css': ['<%= paths.assets %>/grunt.html', '<%= paths.assets %>/requirejs.html']
-              }
-          }
+        uncss: {
+            dist: {
+                options: {
+                    csspath: 'css/',
+                    stylesheets: ['base.css', 'fn-clear.css'],
+                    report: 'min'
+                },
+                files: {
+                    '<%= paths.css %>/tidy.css': ['<%= paths.assets %>/grunt.html', '<%= paths.assets %>/requirejs.html']
+                }
+            }
         },
         rev: {
             options: {
@@ -257,11 +263,13 @@ module.exports = function (grunt) {
                 length: 8
             },
             assets: {
-                files: [{
-                    src: [
-                        '<%= paths.img %>/**/*.{jpg,jpeg,gif,png}'
-                    ]
-                }]
+                files: [
+                    {
+                        src: [
+                            '<%= paths.img %>/**/*.{jpg,jpeg,gif,png}'
+                        ]
+                    }
+                ]
             }
         },
         // 通过connect任务，创建一个静态服务器
@@ -316,15 +324,28 @@ module.exports = function (grunt) {
                     shim: {
 
                     },
-                    modules: [{
-                        name: 'main'
-                    }]
+                    modules: [
+                        {
+                            name: 'main'
+                        }
+                    ]
                 }
             }
         },
         qunit: {
             files: ['test/*.html']
         },
+        svgstore: {
+            options: {
+                includedemo: true
+            },
+            default: {
+                files: {
+                    'dest/dest.svg': ['assets/svgs/*.svg']
+                }
+            }
+        },
+
         watch: {
             options: {
                 livereload: true
