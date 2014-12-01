@@ -43,7 +43,6 @@
     "grunt-csscomb": "^3.0.0-1",
     "grunt-jsonlint": "^1.0.4",
     "grunt-rev": "^0.1.0",
-    "grunt-sprite": "0.0.5",
     "grunt-svgstore": "^0.4.1",
     "grunt-uncss": "^0.3.5",
     "load-grunt-tasks": "^0.6.0",
