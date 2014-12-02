@@ -266,27 +266,25 @@ module.exports = function (grunt) {
                 files: [
                     {
                         src: [
-                            '<%= paths.img %>/**/*.{jpg,jpeg,gif,png}'
+                            '<%= paths.img %>/**/*.{jpg,jpeg,gif,png}',
+                            '<%= paths.css %>/**/*.css'
                         ]
                     }
                 ]
             }
         },
-        // 通过connect任务，创建一个静态服务器
-        connect: {
-            server: {
-                options: {
-                    // 服务器端口号
-                    port: 8088,
-                    // 服务器地址(可以使用主机名localhost，也能使用IP)
-                    hostname: 'localhost',
-                    // 物理路径(默认为. 即根目录)
-                    base: '.',
-                    livereload: true
-                }
+        useminPrepare: {
+            html: ['assets/*.html'],
+            options: {
+                dest: 'build/tpl'
             }
         },
-
+        usemin: {
+            html: ['assets/*.html'],
+            options: {
+                assetsDirs: ['build/js']
+            }
+        },
         yuidoc: {
             compile: {
                 options: {
@@ -345,7 +343,41 @@ module.exports = function (grunt) {
                 }
             }
         },
+        includereplace: {
+            default: {
+                options: {
+                    prefix: '@@',
+                    suffix: ''
+                },
+                src: 'assets/grunt.html',
+                dest: 'build/'
+            }
+        },
+        htmlhint:{
+            default:{
+                src: ['assets/*.html']
+            }
+        },
+        csslint:{
+            default:{
+                src: ['assets/css/*.css']
+            }
+        },
 
+        // 通过connect任务，创建一个静态服务器
+        connect: {
+            server: {
+                options: {
+                    // 服务器端口号
+                    port: 8088,
+                    // 服务器地址(可以使用主机名localhost，也能使用IP)
+                    hostname: 'localhost',
+                    // 物理路径(默认为. 即根目录)
+                    base: '.',
+                    livereload: true
+                }
+            }
+        },
         watch: {
             options: {
                 livereload: true
@@ -373,4 +405,7 @@ module.exports = function (grunt) {
     // 自定义任务
     grunt.registerTask('buildcss', ['cssmin']);
     grunt.registerTask('live', ['connect', 'watch']);
+
+    //usemin
+    grunt.registerTask('dev', ['useminPrepare','concat','uglify','cssmin', 'usemin']);
 };
