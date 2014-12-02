@@ -285,10 +285,7 @@ module.exports = function (grunt) {
             }
         },
         usemin: {
-            html: ['assets/*.html'],
-            options: {
-                assetsDirs: ['build/js']
-            }
+            html: ['assets/*.html']
         },
         yuidoc: {
             compile: {
