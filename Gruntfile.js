@@ -130,7 +130,7 @@ module.exports = function (grunt) {
             },
             copyHtml:{
                 files: [
-                    {expand: true, src: ['<%= paths.assets %>/*.html'], dest: 'build/'}
+                    {expand: true, src: ['assets/*.html'], dest: 'build/'}
                     ]
             }
         },
@@ -412,5 +412,5 @@ module.exports = function (grunt) {
     grunt.registerTask('live', ['connect', 'watch']);
 
     //usemin
-    grunt.registerTask('prd', ['useminPrepare','concat','uglify','cssmin', 'usemin','copy:copyHtml']);
+    grunt.registerTask('prd', ['useminPrepare','concat:generated','uglify:generated','cssmin:generated', 'usemin','copy:copyHtml']);
 };
