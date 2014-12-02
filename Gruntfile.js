@@ -98,7 +98,8 @@ module.exports = function (grunt) {
             delHtml: {
                 src: ['<%= buildPaths.html %>']
             },
-            delZip: ['<%= archive %>*.zip'] //先删除先前生成的压缩包
+            delZip: ['<%= archive %>*.zip'], //先删除先前生成的压缩包
+            delTmp: ['.tmp/']
         },
         concat: {
             build: {
@@ -119,7 +120,6 @@ module.exports = function (grunt) {
                     {expand: true, src: ['*', '!build', '!test', '!.gitignore', '!.DS_Store', '!Gruntfile.js', '!package.json', '!node_modules/**', '!go.sh', '!.ftppass', '!<%= archive %>*.zip'], dest: 'build/'}
                 ]
             },
-
             images: {
                 expand: true,
                 cwd: '<%= paths.img %>',
@@ -127,6 +127,11 @@ module.exports = function (grunt) {
                 dest: '<%= buildPaths.img %>',
                 flatten: true,
                 filter: 'isFile'
+            },
+            copyHtml:{
+                files: [
+                    {expand: true, src: ['<%= paths.assets %>/*.html'], dest: 'build/'}
+                    ]
             }
         },
         htmlmin: {
@@ -276,7 +281,7 @@ module.exports = function (grunt) {
         useminPrepare: {
             html: ['assets/*.html'],
             options: {
-                dest: 'build/tpl'
+                dest: 'build'
             }
         },
         usemin: {
@@ -407,5 +412,5 @@ module.exports = function (grunt) {
     grunt.registerTask('live', ['connect', 'watch']);
 
     //usemin
-    grunt.registerTask('dev', ['useminPrepare','concat','uglify','cssmin', 'usemin']);
+    grunt.registerTask('prd', ['copy:copyHtml','useminPrepare','concat','uglify','cssmin', 'usemin']);
 };
