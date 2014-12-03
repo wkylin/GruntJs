@@ -276,12 +276,14 @@ module.exports = function (grunt) {
                 algorithm: 'md5',
                 length: 8
             },
-            assets: {
+            default: {
                 files: [
                     {
                         src: [
-                            '<%= paths.img %>/**/*.{jpg,jpeg,gif,png}',
-                            '<%= paths.css %>/**/*.css'
+//                            '<%= paths.img %>/**/*.{jpg,jpeg,gif,png}',
+//                            '<%= paths.css %>/**/*.css'
+                            'build/**/*.css',
+                            'build/**/*.js'
                         ]
                     }
                 ]
@@ -409,6 +411,6 @@ module.exports = function (grunt) {
     grunt.registerTask('buildcss', ['cssmin']);
     grunt.registerTask('live', ['connect', 'watch']);
 
-    //usemin
-    grunt.registerTask('prd', ['copy:copyHtml','includereplace','useminPrepare','concat:generated','uglify:generated','cssmin:generated', 'usemin']);
+    //Prd
+    grunt.registerTask('prd', ['copy:copyHtml','includereplace','useminPrepare','concat:generated','uglify:generated','cssmin:generated', 'rev','usemin','clean:delTmp']);
 };
