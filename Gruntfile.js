@@ -410,5 +410,5 @@ module.exports = function (grunt) {
     grunt.registerTask('live', ['connect', 'watch']);
 
     //usemin
-    grunt.registerTask('prd', ['copy:copyHtml','useminPrepare','concat:generated','uglify:generated','cssmin:generated', 'usemin']);
+    grunt.registerTask('prd', ['copy:copyHtml','includereplace','useminPrepare','concat:generated','uglify:generated','cssmin:generated', 'usemin']);
 };

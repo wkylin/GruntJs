@@ -1,4 +1,3 @@
-/*a.js*/
 function testPrdBo(){
     return {
         v:1.0,

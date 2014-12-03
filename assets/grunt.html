@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8">
     <title>GruntJs</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <!-- build:css css/aio.css -->
     <link rel="stylesheet" type="text/css" href="css/base.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/fn-clear.css" media="all">
     <!-- endbuild -->
 
     <!-- build:css css/base.min.css -->
-    <link rel="stylesheet" type="text/css" href="css/base.css" media="all">
-    <link rel="stylesheet" type="text/css" href="css/fn-clear.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/source.css" media="all">
+    <link rel="stylesheet" type="text/css" href="css/grid.css" media="all">
     <!-- endbuild -->
 </head>
 <body>
@@ -22,7 +22,7 @@
 </div>
 
 <div class="fn-include">
-    <!--@@include('include/message.html', {"name": "Grunt"})-->
+    @@include('include/message.html', {"name": "Grunt"})
 </div>
 
 
@@ -32,8 +32,8 @@
 <!-- endbuild -->
 
 <!-- build:js js/pro.min.js -->
-<script type="text/javascript" src="js/utils/testPrdAo.js"></script>
-<script type="text/javascript" src="js/utils/testPrdBo.js"></script>
+<script type="text/javascript" src="js/utils/prdAo.js"></script>
+<script type="text/javascript" src="js/utils/prdBo.js"></script>
 <!-- endbuild -->
 </body>
 </html>
