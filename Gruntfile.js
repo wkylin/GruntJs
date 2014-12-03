@@ -130,9 +130,18 @@ module.exports = function (grunt) {
             },
             copyHtml:{
                 files: [
-                    {expand: true, src: ['assets/*.html'], dest: 'build/'}
-                    ]
+                        {expand: true, src: ['assets/**/*.html'], dest: 'build'}
+                       ]
             }
+        },
+        useminPrepare: {
+            html: ['assets/*.html'],
+            options: {
+                dest: 'build/assets'
+            }
+        },
+        usemin: {
+            html: ['build/assets/*.html']
         },
         htmlmin: {
             build: {
@@ -278,15 +287,7 @@ module.exports = function (grunt) {
                 ]
             }
         },
-        useminPrepare: {
-            html: ['assets/*.html'],
-            options: {
-                dest: 'build'
-            }
-        },
-        usemin: {
-            html: ['assets/*.html']
-        },
+
         yuidoc: {
             compile: {
                 options: {
@@ -409,5 +410,5 @@ module.exports = function (grunt) {
     grunt.registerTask('live', ['connect', 'watch']);
 
     //usemin
-    grunt.registerTask('prd', ['useminPrepare','concat:generated','uglify:generated','cssmin:generated', 'usemin','copy:copyHtml']);
+    grunt.registerTask('prd', ['copy:copyHtml','useminPrepare','concat:generated','uglify:generated','cssmin:generated', 'usemin']);
 };
