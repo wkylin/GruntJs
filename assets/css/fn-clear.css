@@ -9,7 +9,6 @@
     display: block;
     height: 0;
     clear: both;
-
     font-size: 0;
     visibility: hidden;
     content: ' ';
@@ -25,7 +24,6 @@
     width: 400px;
     height: 30px;
     margin: 50px auto;
-
     line-height: 30px;
     text-align: center;
     cursor: pointer;

@@ -305,10 +305,10 @@ module.exports = function (grunt) {
                     appDir: 'assets',
                     baseUrl: 'js',
                     dir: 'build',
-                    /*optimize: 'uglify2',
+                    optimize: 'uglify2',
                      generateSourceMaps: false,
                      preserveLicenseComments: false,
-                     useSourceUrl: true,*/
+                     useSourceUrl: true,
                     optimizeCss: 'standard',
                     paths: {
                         'jquery': 'libs/jquery-1.8.2.min',
