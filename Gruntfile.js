@@ -340,7 +340,8 @@ module.exports = function (grunt) {
         },
         svgstore: {
             options: {
-                includedemo: true
+                includedemo: true,
+                cleanup:['fill']
             },
             default: {
                 files: {
