@@ -21,13 +21,14 @@ module.exports = function (grunt) {
             build: 'build',
             css: 'build/css',
             js: 'build/js',
-            img: 'build/image'
+            img: 'build/assets/image'
         },
         buildType: 'Build',
         //读取package.json的内容，形成个json数据
         pkg: grunt.file.readJSON('package.json'),
         archive: grunt.option('name') || 'GruntJs',//此处可根据自己的需求修改
 
+        //Task配置
         jsonlint: {
             sample: {
                 src: [ '<%= paths.js %>/json/lint.json' ]
@@ -59,6 +60,14 @@ module.exports = function (grunt) {
                 files: {
                     '<%= buildPaths.js %>/index.min.js': ['<%= paths.js %>/getCookie.js', '<%= paths.js %>/docApp.js']
                 }
+            },
+            jsMin:{
+                files: [{
+                    expand: true,
+                    cwd: 'assets/js',
+                    src: '**/*.js',
+                    dest: 'build/assets/js'
+                }]
             }
         },
         cssmin: {
@@ -99,7 +108,8 @@ module.exports = function (grunt) {
                 src: ['<%= buildPaths.html %>']
             },
             delZip: ['<%= archive %>*.zip'], //先删除先前生成的压缩包
-            delTmp: ['.tmp/']
+            delTmp: ['.tmp/'],
+            delInclude:['build/assets/include']
         },
         concat: {
             build: {
@@ -349,6 +359,29 @@ module.exports = function (grunt) {
                 }
             }
         },
+        webfont: {
+            icons: {
+                src: 'assets/svgs/*.svg',
+                dest: 'build/assets/fonts',
+                htmlDemo:true,
+                embed: true
+            }
+        },
+        browserSync: {
+            bsFiles: {
+                //src : 'build/assets/css/*.css'
+                //src : 'assets/**/*.*'
+                src : 'build/assets/**'
+            },
+            options: {
+                server: {
+                 baseDir: "./"
+                 },
+                watchTask: true,// < VERY important
+                port:3000,
+                reloadDelay:100
+            }
+        },
         includereplace: {
             default: {
                 options: {
@@ -379,7 +412,7 @@ module.exports = function (grunt) {
                     // 服务器地址(可以使用主机名localhost，也能使用IP)
                     hostname: 'localhost',
                     // 物理路径(默认为. 即根目录)
-                    base: '.',
+                    base: './',
                     livereload: true
                 }
             }
@@ -389,29 +422,34 @@ module.exports = function (grunt) {
                 livereload: true
             },
 
-            js: {
-                files: ['assets/js/*.js'],
-                tasks: ['uglify']
-            },
-            css: {
-                files: ['assets/css/*.css'],
-                tasks: ['buildcss']
-            },
-            concat: {
-                files: ['assets/js/*.js'],
-                tasks: ['concat']
+            /*js: {
+             files: ['assets/js*//*.js'],
+             tasks: ['uglify']
+             },
+             css: {
+             files: ['assets/css*//*.css'],
+             tasks: ['buildcss']
+             },
+             concat: {
+             files: ['assets/js*//*.js'],
+             tasks: ['concat']
+             },*/
+            prd:{
+                files: ['assets/**/*.*'],
+                tasks: ['copy:copyHtml','includereplace','useminPrepare','concat:generated','uglify:generated','cssmin:generated','usemin','clean:delTmp','clean:delInclude']
             }
         }
     });
 
 
     // 默认执行的任务
-    grunt.registerTask('default', ['live']);
+    grunt.registerTask('default', ['live','prd']);
 
     // 自定义任务
     grunt.registerTask('buildcss', ['cssmin']);
-    grunt.registerTask('live', ['connect', 'watch']);
+    grunt.registerTask('live', [ 'browserSync','connect','watch']);
 
     //Prd
-    grunt.registerTask('prd', ['copy:copyHtml','includereplace','useminPrepare','concat:generated','uglify:generated','cssmin:generated', 'rev','usemin','clean:delTmp']);
+    //grunt.registerTask('prd', ['clean:build','copy:copyHtml','includereplace','useminPrepare','concat:generated','uglify:generated','cssmin:generated', 'rev','usemin','clean:delTmp','clean:delInclude']);
+    grunt.registerTask('prd', ['connect','clean:build','copy:copyHtml','includereplace','useminPrepare','concat:generated','uglify:generated','cssmin:generated', 'usemin','clean:delTmp','clean:delInclude']);
 };

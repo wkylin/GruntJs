@@ -5,11 +5,11 @@
  * @require: null
  */
 .grid{
-   width:990px;
+   width:100%;
     margin:0 auto;
 }
 .grid-box {
-  width:100px;
-    height:100px;
+  width:50%;
+    height:50%;
     border:1px solid #f00;
 }
