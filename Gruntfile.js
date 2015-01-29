@@ -359,14 +359,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-        webfont: {
-            icons: {
-                src: 'assets/svgs/*.svg',
-                dest: 'build/assets/fonts',
-                htmlDemo:true,
-                embed: true
-            }
-        },
         browserSync: {
             bsFiles: {
                 //src : 'build/assets/css/*.css'
@@ -377,7 +369,7 @@ module.exports = function (grunt) {
                 server: {
                  baseDir: "./"
                  },
-                watchTask: true,// < VERY important
+                watchTask: true,
                 port:3000,
                 reloadDelay:100
             }
