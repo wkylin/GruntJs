@@ -3,8 +3,8 @@ requirejs.config({
     baseUrl: './js',
     paths: {
         'jquery': 'libs/jquery-1.8.2.min',
-        'beta':'utils/jquery.beta',
-        'alpha':'utils/jquery.alpha',
+        'beta': 'utils/jquery.beta',
+        'alpha': 'utils/jquery.alpha',
         'a': 'utils/a',
         'b': 'utils/b',
         'c': 'utils/c',
@@ -12,18 +12,18 @@ requirejs.config({
         'e': 'utils/e',
         'main': 'utils/main',
         'math': 'utils/math',
-        'domready':'utils/domready',
-        'f':"utils/f"
+        'domready': 'utils/domready',
+        'f': "utils/f"
     }
 });
 // 非AMD模块配置
 requirejs.config({
     shim: {
-        'beta':{
-            deps:['jquery']
+        'beta': {
+            deps: ['jquery']
         },
-        'alpha':{
-            deps:['jquery']
+        'alpha': {
+            deps: ['jquery']
         }
     }
 });
@@ -44,7 +44,7 @@ requirejs(['math'], function (math) {
 // Load the main app module to start the app
 requirejs(["f"]);
 
-requirejs(['domready!'], function (doc){
+requirejs(['domready!'], function (doc) {
     //called once the DOM is ready
     console.log(doc.getElementById('J_uiGrid').nodeName);
 

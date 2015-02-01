@@ -2,6 +2,6 @@
  * Created by wangjingang on 2015/1/30.
  */
 
-function fn(){
+function fn() {
     return "fn";
 }

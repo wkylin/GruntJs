@@ -4,13 +4,10 @@
  * @overview:
  * @require: null
  */
-
-@color: #4D926F;
-
 .header {
-  color: @color;
+    color: #32924f;
 }
 
 .h4 {
-  color: @color;
+    color: #4d926f;
 }

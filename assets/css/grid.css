@@ -4,12 +4,13 @@
  * @overview:
  * @require: null
  */
-.grid{
-   width:100%;
-    margin:0 auto;
+.grid {
+    width: 100%;
+    margin: 0 auto;
 }
+
 .grid-box {
-  width:50%;
-    height:50%;
-    border:1px solid #f00;
+    width: 50%;
+    height: 50%;
+    border: 1px solid #65ffe4;
 }

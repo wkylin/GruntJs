@@ -6,7 +6,7 @@
 
 var App = App || {};
 
-App.Global = (function() {
+App.Global = (function () {
 
     var self = {
 
@@ -15,7 +15,7 @@ App.Global = (function() {
          @method App.Global.init
          @param foo {String} A sample parameter.
          */
-        'init': function(foo) {
+        'init': function (foo) {
 
             //
 

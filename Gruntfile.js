@@ -31,16 +31,16 @@ module.exports = function (grunt) {
         //Task配置
         jsonlint: {
             sample: {
-                src: [ '<%= paths.js %>/json/lint.json' ]
+                src: ['<%= paths.js %>/json/lint.json']
             }
         },
         uglify: {
             options: {
                 banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - '
-                    + '<%= grunt.template.today("yyyy-mm-dd") %>\n'
-                    + '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>'
-                    + '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;'
-                    + ' Licensed <%= pkg.license %> */\n',
+                + '<%= grunt.template.today("yyyy-mm-dd") %>\n'
+                + '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>'
+                + '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author %>;'
+                + ' Licensed <%= pkg.license %> */\n',
                 mangle: true,
                 beautify: false
             },
@@ -61,7 +61,7 @@ module.exports = function (grunt) {
                     '<%= buildPaths.js %>/index.min.js': ['<%= paths.js %>/getCookie.js', '<%= paths.js %>/docApp.js']
                 }
             },
-            jsMin:{
+            jsMin: {
                 files: [{
                     expand: true,
                     cwd: 'assets/js',
@@ -93,10 +93,10 @@ module.exports = function (grunt) {
         },
         clean: {
             build: {
-                src: [ 'build/' ]
+                src: ['build/']
             },
             delDoc: {
-                src: [ 'docs/' ]
+                src: ['docs/']
             },
             delCss: {
                 src: ['<%= buildPaths.css %>']
@@ -109,14 +109,14 @@ module.exports = function (grunt) {
             },
             delZip: ['<%= archive %>*.zip'], //先删除先前生成的压缩包
             delTmp: ['.tmp/'],
-            delInclude:['build/assets/include']
+            delInclude: ['build/assets/include']
         },
         concat: {
             build: {
                 options: {
                     separator: '\n'
                 },
-                src: [ '<%= paths.js %>/*.js' ],
+                src: ['<%= paths.js %>/*.js'],
                 dest: '<%= buildPaths.js %>/concatIndex.js'
             }
         },
@@ -127,7 +127,11 @@ module.exports = function (grunt) {
                     {expand: true, src: ['<%= paths.css %>/*.css'], dest: 'build/'},
                     {expand: true, src: ['<%= paths.img %>/**'], dest: 'build/'},
                     {expand: true, src: ['<%= paths.js %>/**'], dest: 'build/'},
-                    {expand: true, src: ['*', '!build', '!test', '!.gitignore', '!.DS_Store', '!Gruntfile.js', '!package.json', '!node_modules/**', '!go.sh', '!.ftppass', '!<%= archive %>*.zip'], dest: 'build/'}
+                    {
+                        expand: true,
+                        src: ['*', '!build', '!test', '!.gitignore', '!.DS_Store', '!Gruntfile.js', '!package.json', '!node_modules/**', '!go.sh', '!.ftppass', '!<%= archive %>*.zip'],
+                        dest: 'build/'
+                    }
                 ]
             },
             images: {
@@ -138,10 +142,10 @@ module.exports = function (grunt) {
                 flatten: true,
                 filter: 'isFile'
             },
-            copyHtml:{
+            copyHtml: {
                 files: [
-                        {expand: true, src: ['assets/**/*.html'], dest: 'build'}
-                       ]
+                    {expand: true, src: ['assets/**/*.html'], dest: 'build'}
+                ]
             }
         },
         useminPrepare: {
@@ -316,9 +320,9 @@ module.exports = function (grunt) {
                     baseUrl: 'js',
                     dir: 'build',
                     optimize: 'uglify2',
-                     generateSourceMaps: false,
-                     preserveLicenseComments: false,
-                     useSourceUrl: true,
+                    generateSourceMaps: false,
+                    preserveLicenseComments: false,
+                    useSourceUrl: true,
                     optimizeCss: 'standard',
                     paths: {
                         'jquery': 'libs/jquery-1.8.2.min',
@@ -334,9 +338,7 @@ module.exports = function (grunt) {
                         'math': 'utils/math',
                         'main': 'app/main'
                     },
-                    shim: {
-
-                    },
+                    shim: {},
                     modules: [
                         {
                             name: 'main'
@@ -351,7 +353,7 @@ module.exports = function (grunt) {
         svgstore: {
             options: {
                 includedemo: true,
-                cleanup:['fill']
+                cleanup: ['fill']
             },
             default: {
                 files: {
@@ -363,15 +365,15 @@ module.exports = function (grunt) {
             bsFiles: {
                 //src : 'build/assets/css/*.css'
                 //src : 'assets/**/*.*'
-                src : 'build/assets/**'
+                src: 'build/assets/**'
             },
             options: {
                 server: {
-                 baseDir: "./"
-                 },
+                    baseDir: "./"
+                },
                 watchTask: true,
-                port:3000,
-                reloadDelay:100
+                port: 3000,
+                reloadDelay: 100
             }
         },
         includereplace: {
@@ -384,13 +386,13 @@ module.exports = function (grunt) {
                 dest: 'build/'
             }
         },
-        htmlhint:{
-            default:{
+        htmlhint: {
+            default: {
                 src: ['assets/*.html']
             }
         },
-        csslint:{
-            default:{
+        csslint: {
+            default: {
                 src: ['assets/css/*.css']
             }
         },
@@ -426,22 +428,22 @@ module.exports = function (grunt) {
              files: ['assets/js*//*.js'],
              tasks: ['concat']
              },*/
-            prd:{
+            prd: {
                 files: ['assets/**/*.*'],
-                tasks: ['copy:copyHtml','includereplace','useminPrepare','concat:generated','uglify:generated','cssmin:generated','usemin','clean:delTmp','clean:delInclude']
+                tasks: ['copy:copyHtml', 'includereplace', 'useminPrepare', 'concat:generated', 'uglify:generated', 'cssmin:generated', 'usemin', 'clean:delTmp', 'clean:delInclude']
             }
         }
     });
 
 
     // 默认执行的任务
-    grunt.registerTask('default', ['live','prd']);
+    grunt.registerTask('default', ['live', 'prd']);
 
     // 自定义任务
     grunt.registerTask('buildcss', ['cssmin']);
-    grunt.registerTask('live', [ 'browserSync','connect','watch']);
+    grunt.registerTask('live', ['browserSync', 'connect', 'watch']);
 
     //Prd
     //grunt.registerTask('prd', ['clean:build','copy:copyHtml','includereplace','useminPrepare','concat:generated','uglify:generated','cssmin:generated', 'rev','usemin','clean:delTmp','clean:delInclude']);
-    grunt.registerTask('prd', ['connect','clean:build','copy:copyHtml','includereplace','useminPrepare','concat:generated','uglify:generated','cssmin:generated', 'usemin','clean:delTmp','clean:delInclude']);
+    grunt.registerTask('prd', ['connect', 'clean:build', 'copy:copyHtml', 'includereplace', 'useminPrepare', 'concat:generated', 'uglify:generated', 'cssmin:generated', 'usemin', 'clean:delTmp', 'clean:delInclude']);
 };

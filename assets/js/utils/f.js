@@ -1,6 +1,6 @@
-define(["jquery", "alpha", "beta"], function($) {
+define(["jquery", "alpha", "beta"], function ($) {
     //the jquery.alpha.js and jquery.beta.js plugins have been loaded.
-    $(function() {
+    $(function () {
         $('body').alpha().beta();
     });
 });

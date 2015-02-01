@@ -18,10 +18,10 @@ function getCookie(name) {
     return cookieValue;
 }
 
-(function(){
-    $(".sbar_oper li").hover(function(){
+(function () {
+    $(".sbar_oper li").hover(function () {
         $(this).addClass("curr");
-    },function(){
+    }, function () {
         $(this).removeClass("curr");
     });
 })();
