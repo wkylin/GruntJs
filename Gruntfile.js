@@ -431,6 +431,10 @@ module.exports = function (grunt) {
             prd: {
                 files: ['assets/**/*.*'],
                 tasks: ['copy:copyHtml', 'includereplace', 'useminPrepare', 'concat:generated', 'uglify:generated', 'cssmin:generated', 'usemin', 'clean:delTmp', 'clean:delInclude']
+            },
+            allJs: {
+                files: ['assets/js/**/*.js'],
+                tasks: ['newer:uglify:jsMin']
             }
         }
     });
@@ -446,4 +450,6 @@ module.exports = function (grunt) {
     //Prd
     //grunt.registerTask('prd', ['clean:build','copy:copyHtml','includereplace','useminPrepare','concat:generated','uglify:generated','cssmin:generated', 'rev','usemin','clean:delTmp','clean:delInclude']);
     grunt.registerTask('prd', ['connect', 'clean:build', 'copy:copyHtml', 'includereplace', 'useminPrepare', 'concat:generated', 'uglify:generated', 'cssmin:generated', 'usemin', 'clean:delTmp', 'clean:delInclude']);
+
+    grunt.registerTask('minify', ['newer:uglify:jsMin']);
 };
