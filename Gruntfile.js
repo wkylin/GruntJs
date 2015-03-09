@@ -303,7 +303,17 @@ module.exports = function (grunt) {
                 ]
             }
         },
-
+        perfbudget: {
+            default: {
+                options: {
+                    url: 'http://pai.chexiang.com',
+                    budget: {
+                        visualComplete: '4000',
+                        speedIndex: '1500'
+                    }
+                }
+            }
+        },
         yuidoc: {
             compile: {
                 options: {

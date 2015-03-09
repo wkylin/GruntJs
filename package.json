@@ -47,6 +47,7 @@
     "grunt-include-replace": "^2.0.0",
     "grunt-jsonlint": "^1.0.4",
     "grunt-newer": "^1.1.0",
+    "grunt-perfbudget": "^0.1.6",
     "grunt-rev": "^0.1.0",
     "grunt-svgstore": "^0.5.0",
     "grunt-uncss": "^0.3.5",
