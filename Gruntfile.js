@@ -28,6 +28,19 @@ module.exports = function (grunt) {
         pkg: grunt.file.readJSON('package.json'),
         archive: grunt.option('name') || 'GruntJs',//此处可根据自己的需求修改
 
+        //config
+        copyFiles: {
+            options: {
+                workingDirectory: 'working',
+                manifest:[
+                    'assets/grunt.html',
+                    'assets/css/base.css',
+                    'assets/js/docApp.js'
+                ]
+
+            }
+        },
+
         //Task配置
         jsonlint: {
             sample: {
@@ -375,7 +388,8 @@ module.exports = function (grunt) {
             bsFiles: {
                 //src : 'build/assets/css/*.css'
                 //src : 'assets/**/*.*'
-                src: 'build/assets/**'
+                //src: 'build/assets/**'
+                src: 'assets/**'
             },
             options: {
                 server: {
@@ -449,7 +463,6 @@ module.exports = function (grunt) {
         }
     });
 
-
     // 默认执行的任务
     grunt.registerTask('default', ['live', 'prd']);
 
@@ -462,4 +475,55 @@ module.exports = function (grunt) {
     grunt.registerTask('prd', ['connect', 'clean:build', 'copy:copyHtml', 'includereplace', 'useminPrepare', 'concat:generated', 'uglify:generated', 'cssmin:generated', 'usemin', 'clean:delTmp', 'clean:delInclude']);
 
     grunt.registerTask('minify', ['newer:uglify:jsMin']);
+
+    grunt.registerTask('greet', function (name) {
+        grunt.log.writeln('Hi there, ' + name);
+    });
+
+    grunt.registerTask('addNumbers', function (first, second) {
+        var answer = Number(first) + Number(second);
+        if (isNaN(Number(first))) {
+            grunt.warn('The first argument must be a number.');
+        }
+        grunt.log.writeln(first + ' + ' + second + ' is ' + answer);
+    });
+
+    grunt.registerTask('praise','Have Grunt say nice things about you.', function () {
+            var praise = [
+                "You're awesome.",
+                "You're the best developer ever!",
+                "You are extremely attractive.",
+                "Everyone loves you!"
+            ]
+            var pick = praise[(Math.floor(Math.random() * praise.length))];
+            grunt.log.writeln(pick);
+        });
+
+
+    //Manage Files
+    grunt.registerTask('createFolder', 'Create the working folder', function () {
+        grunt.config.requires('copyFiles.options.workingDirectory');
+        grunt.file.mkdir(grunt.config.get('copyFiles.options.workingDirectory'));
+    });
+
+    grunt.registerTask('clean','Deletes the working folder and its contents', function () {
+            grunt.config.requires('copyFiles.options.workingDirectory');
+            grunt.file.delete(grunt.config.get('copyFiles.options.workingDirectory'));
+    });
+
+    grunt.registerTask('copyFiles', function () {
+        var files, workingDirectory;
+        grunt.config.requires('copyFiles.options.manifest');
+        grunt.config.requires('copyFiles.options.workingDirectory');
+        files = grunt.config.get('copyFiles.options.manifest');
+        workingDirectory =
+            grunt.config.get('copyFiles.options.workingDirectory');
+        files.forEach(function (file) {
+            var destination = workingDirectory + '/' + file;
+            grunt.log.writeln('Copying ' + file + ' to ' + destination);
+            grunt.file.copy(file, destination);
+        });
+    });
+
+    grunt.registerTask('deploy', 'Deploys files',['clean', 'createFolder', 'copyFiles']);
 };
