@@ -41,6 +41,21 @@ module.exports = function (grunt) {
             }
         },
 
+        //Multi Tasks
+        multiTasks: {
+            angular: {
+                src: ['bower_components/angular/angular.js',
+                    'bower_components/angular-resource/angular-resource.js'],
+                dest: 'dist/angular.js'
+            },
+            angularWithjQuery: {
+                src: ['bower_components/jquery/dist/jquery.js',
+                    'bower_components/angular/angular.js',
+                    'bower_components/angular-resource/angular-resource.js'],
+                dest: 'dist/jquery-angular.js'
+            }
+        },
+
         //Task配置
         jsonlint: {
             sample: {
@@ -526,4 +541,16 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('deploy', 'Deploys files',['clean', 'createFolder', 'copyFiles']);
+
+    //registerMultiTask
+    grunt.registerMultiTask('multiTasks', 'Concatenate files.', function () {
+        var output = '';
+        this.files.forEach(function (filegroup) {
+            var sources = filegroup.src.map(function (file) {
+                return (grunt.file.read(file));
+            });
+            output = sources.join(';');
+            grunt.file.write(filegroup.dest, output);
+        });
+    });
 };
