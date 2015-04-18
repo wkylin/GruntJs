@@ -16,3 +16,12 @@ GruntJs----基于Node.js的自动化构建工具
 参考资料：
 
 <http://pan.baidu.com/s/1jGLqUiE>
+
+
+####记录使用问题：
+
+grunt-contrib-sass 未安装成功
+
+grunt-scss-lint 未安装成功
+
+

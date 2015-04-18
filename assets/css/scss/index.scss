@@ -1,0 +1,10 @@
+.foo{
+  margin:0;
+}
+
+.foo{
+  .bar{
+    color:red;
+  }
+
+}

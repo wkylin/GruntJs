@@ -222,6 +222,18 @@ module.exports = function (grunt) {
                 ]
             }
         },
+        jscoverage: {
+            src: {
+                expand: true,
+                cwd: 'assets/',
+                src: ['**/*.js'],
+                dest: 'coverage/',
+                ext: '.js'
+            },
+            options: {
+                // custom options
+            }
+        },
         jshint: {
             options: {
                 curly: true,
@@ -261,6 +273,13 @@ module.exports = function (grunt) {
                         ext: ".css"
                     }
                 ]
+            }
+        },
+        sass: {
+            dist: {
+                files: {
+                    'assets/css/scss.css': 'assets/css/scss/scss.scss'
+                }
             }
         },
         compress: {
