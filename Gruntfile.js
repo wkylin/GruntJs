@@ -121,10 +121,10 @@ module.exports = function (grunt) {
         },
         clean: {
             build: {
-                src: ['build/']
+                src: ['build']
             },
             delDoc: {
-                src: ['docs/']
+                src: ['docs']
             },
             delCss: {
                 src: ['<%= buildPaths.css %>']
@@ -136,7 +136,7 @@ module.exports = function (grunt) {
                 src: ['<%= buildPaths.html %>']
             },
             delZip: ['<%= archive %>*.zip'], //先删除先前生成的压缩包
-            delTmp: ['.tmp/'],
+            delTmp: ['.tmp'],
             delInclude: ['build/assets/include']
         },
         concat: {
@@ -507,69 +507,4 @@ module.exports = function (grunt) {
     //Prd
     //grunt.registerTask('prd', ['clean:build','copy:copyHtml','includereplace','useminPrepare','concat:generated','uglify:generated','cssmin:generated', 'rev','usemin','clean:delTmp','clean:delInclude']);
     grunt.registerTask('prd', ['connect', 'clean:build', 'copy:copyHtml', 'includereplace', 'useminPrepare', 'concat:generated', 'uglify:generated', 'cssmin:generated', 'usemin', 'clean:delTmp', 'clean:delInclude']);
-
-    grunt.registerTask('minify', ['newer:uglify:jsMin']);
-
-    grunt.registerTask('greet', function (name) {
-        grunt.log.writeln('Hi there, ' + name);
-    });
-
-    grunt.registerTask('addNumbers', function (first, second) {
-        var answer = Number(first) + Number(second);
-        if (isNaN(Number(first))) {
-            grunt.warn('The first argument must be a number.');
-        }
-        grunt.log.writeln(first + ' + ' + second + ' is ' + answer);
-    });
-
-    grunt.registerTask('praise','Have Grunt say nice things about you.', function () {
-            var praise = [
-                "You're awesome.",
-                "You're the best developer ever!",
-                "You are extremely attractive.",
-                "Everyone loves you!"
-            ]
-            var pick = praise[(Math.floor(Math.random() * praise.length))];
-            grunt.log.writeln(pick);
-        });
-
-
-    //Manage Files
-    grunt.registerTask('createFolder', 'Create the working folder', function () {
-        grunt.config.requires('copyFiles.options.workingDirectory');
-        grunt.file.mkdir(grunt.config.get('copyFiles.options.workingDirectory'));
-    });
-
-    grunt.registerTask('clean','Deletes the working folder and its contents', function () {
-            grunt.config.requires('copyFiles.options.workingDirectory');
-            grunt.file.delete(grunt.config.get('copyFiles.options.workingDirectory'));
-    });
-
-    grunt.registerTask('copyFiles', function () {
-        var files, workingDirectory;
-        grunt.config.requires('copyFiles.options.manifest');
-        grunt.config.requires('copyFiles.options.workingDirectory');
-        files = grunt.config.get('copyFiles.options.manifest');
-        workingDirectory =
-            grunt.config.get('copyFiles.options.workingDirectory');
-        files.forEach(function (file) {
-            var destination = workingDirectory + '/' + file;
-            grunt.log.writeln('Copying ' + file + ' to ' + destination);
-            grunt.file.copy(file, destination);
-        });
-    });
-
-    grunt.registerTask('deploy', 'Deploys files',['clean', 'createFolder', 'copyFiles']);
-
-    //registerMultiTask
-    grunt.registerMultiTask('multiTasks', 'Concatenate files.', function () {
-        var output = '';
-        this.files.forEach(function (filegroup) {
-            var sources = filegroup.src.map(function (file) {
-                return (grunt.file.read(file));
-            });
-            output = sources.join(';');
-            grunt.file.write(filegroup.dest, output);
-        });
-    });
 };
