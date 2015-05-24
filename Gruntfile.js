@@ -285,6 +285,15 @@ module.exports = function (grunt) {
                 }
             }
         },
+        scsslint: {
+            allFiles: [
+                'assets/css/scss/*.scss',
+            ],
+            options: {
+                bundleExec: true,
+                colorizeOutput: true
+            },
+        },
         compress: {
             main: {
                 options: {

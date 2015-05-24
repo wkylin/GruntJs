@@ -20,8 +20,8 @@ GruntJs----基于Node.js的自动化构建工具
 
 ####记录使用问题：
 
-grunt-contrib-sass 未安装成功
+grunt-contrib-sass 安装成功
 
-grunt-scss-lint 未安装成功
+grunt-scss-lint 安装成功
 
 
