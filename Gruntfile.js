@@ -32,7 +32,7 @@ module.exports = function (grunt) {
         copyFiles: {
             options: {
                 workingDirectory: 'working',
-                manifest:[
+                manifest: [
                     'assets/grunt.html',
                     'assets/css/base.css',
                     'assets/js/docApp.js'
@@ -276,9 +276,12 @@ module.exports = function (grunt) {
             }
         },
         sass: {
+            options:{
+              style: 'expanded'
+            },
             dist: {
                 files: {
-                    'assets/css/scss.css': 'assets/css/scss/scss.scss'
+                    'assets/css/scss/index.css': 'assets/css/scss/index.scss'
                 }
             }
         },
@@ -332,12 +335,12 @@ module.exports = function (grunt) {
                 }
             }
         },
-        rev: {
+        filerev: {
             options: {
                 algorithm: 'md5',
                 length: 8
             },
-            default: {
+            dist: {
                 files: [
                     {
                         src: [
@@ -351,7 +354,7 @@ module.exports = function (grunt) {
             }
         },
         perfbudget: {
-            default: {
+            dist: {
                 options: {
                     url: 'http://pai.chexiang.com',
                     budget: {
@@ -412,10 +415,17 @@ module.exports = function (grunt) {
                 includedemo: true,
                 cleanup: ['fill']
             },
-            default: {
+            dist: {
                 files: {
                     'build/svg/dest.svg': ['assets/svgs/*.svg']
                 }
+            }
+        },
+        webfont: {
+            icons: {
+                src: 'assets/svgs/*.svg',
+                dest: 'build/fonts'
+
             }
         },
         browserSync: {
@@ -435,7 +445,7 @@ module.exports = function (grunt) {
             }
         },
         includereplace: {
-            default: {
+            dist: {
                 options: {
                     prefix: '@@',
                     suffix: ''
@@ -445,12 +455,12 @@ module.exports = function (grunt) {
             }
         },
         htmlhint: {
-            default: {
+            dist: {
                 src: ['assets/*.html']
             }
         },
         csslint: {
-            default: {
+            dist: {
                 src: ['assets/css/*.css']
             }
         },
@@ -505,6 +515,5 @@ module.exports = function (grunt) {
     grunt.registerTask('live', ['browserSync', 'connect', 'watch']);
 
     //Prd
-    //grunt.registerTask('prd', ['clean:build','copy:copyHtml','includereplace','useminPrepare','concat:generated','uglify:generated','cssmin:generated', 'rev','usemin','clean:delTmp','clean:delInclude']);
-    grunt.registerTask('prd', ['connect', 'clean:build', 'copy:copyHtml', 'includereplace', 'useminPrepare', 'concat:generated', 'uglify:generated', 'cssmin:generated', 'usemin', 'clean:delTmp', 'clean:delInclude']);
+    grunt.registerTask('prd', ['clean:build', 'copy:copyHtml', 'includereplace', 'useminPrepare', 'concat:generated', 'uglify:generated', 'cssmin:generated', 'filerev', 'usemin', 'clean:delTmp', 'clean:delInclude']);
 };
