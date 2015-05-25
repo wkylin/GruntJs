@@ -18,10 +18,17 @@ GruntJs----基于Node.js的自动化构建工具
 <http://pan.baidu.com/s/1jGLqUiE>
 
 
-####记录使用问题：
+###Nodejs领域: 
 
-grunt-contrib-sass 安装成功
+1.Jasmine做单元测试，
+2.Karma自动化完成单元测试，
+3.Grunt启动Karma统一项目管理，
+4.Yeoman最后封装成一个项目原型模板，
+5.npm做nodejs的包依赖管理，
+6.bower做javascript的包依赖管理。
+    
+###Java领域：
 
-grunt-scss-lint 安装成功
-
+1.Unit做单元测试
+2.Maven自动化单元测试，统一项目管理，构建项目原型模板，包依赖管理。
 
