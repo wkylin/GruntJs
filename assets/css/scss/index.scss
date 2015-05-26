@@ -1,10 +1,71 @@
-.foo {
-  margin: 0;
+@mixin prefix($property, $value, $prefixes: webkit moz ms o spec) {
+  @each $p in $prefixes {
+    @if $p == spec {
+      #{$property}: $value;
+    } @else {
+      -#{$p}-#{$property}: $value;
+    }
+  }
 }
 
-.foo {
-  .bar {
-    color: red;
-  }
+$input_field: #999;
+$input_focus: #559ab9;
+$validation_passed: #8aba56;
+$validation_failed: #ba5656;
+$bg_colour: #f4f4f4;
+$box_colour: #fff;
+$border_style: 1px solid;
+$border_radius: 4px;
 
+html {
+  background: $bg_colour;
+}
+
+body {
+  width: 720px;
+  padding: 40px;
+  margin: 80px auto;
+  background: $box_colour;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+  border-radius: $border_radius;
+  font-family: sans-serif;
+}
+
+input[type="text"] {
+  @include prefix(appearance, none, webkit moz);
+  @include prefix(transition, border .3s ease);
+  border-radius: $border_radius;
+  border: $border_style $input_field;
+  width: 220px;
+}
+
+input[type="text"]:focus {
+  border-color: $input_focus;
+  outline: 0;
+}
+
+label,
+input[type="text"],
+.validation {
+  line-height: 1;
+  font-size: 1em;
+  padding: 10px;
+  display: inline;
+  margin-right: 20px;
+}
+
+input.yep {
+  border-color: $validation_passed;
+}
+
+input.nope {
+  border-color: $validation_failed;
+}
+
+p.yep {
+  color: $validation_passed;
+}
+
+p.nope {
+  color: $validation_failed;
 }

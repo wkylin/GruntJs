@@ -21,6 +21,7 @@
   "homepage": "https://github.com/wkylin/GruntJs",
   "devDependencies": {
     "connect-livereload": "^0.4.0",
+    "css-condense": "0.0.6",
     "grunt": "^0.4.5",
     "grunt-browser-sync": "^2.1.3",
     "grunt-contrib-clean": "^0.6.0",

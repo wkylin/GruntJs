@@ -309,12 +309,15 @@ module.exports = function (grunt) {
         cssc: {
             build: {
                 options: {
+                    sortSelectors: true,
+                    lineBreaks: true,
+                    sortDeclarations: true,
                     consolidateViaDeclarations: true,
                     consolidateViaSelectors: true,
                     consolidateMediaQueries: true
                 },
                 files: {
-                    '<% paths.css %>/source.css': '<%= paths.css %>/source.css'
+                    '<% paths.css %>/source2.css': '<%= paths.css %>/source2.css'
                 }
             }
         },
