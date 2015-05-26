@@ -45,6 +45,7 @@
     "grunt-contrib-yuidoc": "^0.5.2",
     "grunt-cssc": "^0.2.6",
     "grunt-csscomb": "^3.0.0-1",
+    "grunt-csso": "^0.7.1",
     "grunt-filerev": "^2.3.1",
     "grunt-htmlhint": "^0.4.1",
     "grunt-include-replace": "^2.0.0",

@@ -11,11 +11,11 @@ module.exports = function (grunt) {
 
         //默认文件目录在这里
         paths: {
-            assets: 'assets',//输出的最终文件assets里面
-            less: 'assets/css/less',//推荐使用Less
-            css: 'assets/css', //若简单项目，可直接使用原生CSS，同样可以grunt watch:base进行监控
-            js: 'assets/js', //js文件相关目录
-            img: 'assets/image' //图片相关
+            assets: 'assets',
+            less: 'assets/css/less',
+            css: 'assets/css',
+            js: 'assets/js',
+            img: 'assets/image'
         },
         buildPaths: {
             build: 'build',
@@ -24,6 +24,7 @@ module.exports = function (grunt) {
             img: 'build/assets/image'
         },
         buildType: 'Build',
+
         //读取package.json的内容，形成个json数据
         pkg: grunt.file.readJSON('package.json'),
         archive: grunt.option('name') || 'GruntJs',//此处可根据自己的需求修改
@@ -322,6 +323,15 @@ module.exports = function (grunt) {
             }
         },
 
+        csso: {
+            build: {
+                expand: true,
+                cwd: '<% paths.css %>/',
+                src: ['*.css', '!*.min.css'],
+                dest: '<% paths.css %>/',
+                ext: '.min.css'
+            }
+        },
         //按照预定义的排序格式重新排列CSS中定义的属性
         csscomb: {
             options: {
