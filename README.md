@@ -36,3 +36,8 @@ GruntJs----基于Node.js的自动化构建工具
 ###CSScomb配置
 
 [https://github.com/csscomb/csscomb.js/blob/master/doc/options.md](https://github.com/csscomb/csscomb.js/blob/master/doc/options.md "CSScomb config options")
+
+
+###CSSLint Options
+
+[https://github.com/gruntjs/grunt-contrib-csslint](https://github.com/gruntjs/grunt-contrib-csslint "CSSLint Options")
