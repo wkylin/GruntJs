@@ -310,15 +310,12 @@ module.exports = function (grunt) {
         cssc: {
             build: {
                 options: {
-                    sortSelectors: true,
-                    lineBreaks: true,
-                    sortDeclarations: true,
                     consolidateViaDeclarations: true,
                     consolidateViaSelectors: true,
                     consolidateMediaQueries: true
                 },
                 files: {
-                    '<% paths.css %>/source2.css': '<%= paths.css %>/source2.css'
+                    '<%= paths.css %>/cssc2.css': '<%= paths.css %>/source.css'
                 }
             }
         },
@@ -326,9 +323,9 @@ module.exports = function (grunt) {
         csso: {
             build: {
                 expand: true,
-                cwd: '<% paths.css %>/',
+                cwd: '<%= paths.css %>/',
                 src: ['*.css', '!*.min.css'],
-                dest: '<% paths.css %>/',
+                dest: '<%= buildPaths.css %>/',
                 ext: '.min.css'
             }
         },
