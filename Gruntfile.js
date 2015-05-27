@@ -42,21 +42,6 @@ module.exports = function (grunt) {
             }
         },
 
-        //Multi Tasks
-        multiTasks: {
-            angular: {
-                src: ['bower_components/angular/angular.js',
-                    'bower_components/angular-resource/angular-resource.js'],
-                dest: 'dist/angular.js'
-            },
-            angularWithjQuery: {
-                src: ['bower_components/jquery/dist/jquery.js',
-                    'bower_components/angular/angular.js',
-                    'bower_components/angular-resource/angular-resource.js'],
-                dest: 'dist/jquery-angular.js'
-            }
-        },
-
         //Task配置
         jsonlint: {
             sample: {
@@ -236,7 +221,7 @@ module.exports = function (grunt) {
             }
         },
         jshint: {
-            options: {
+          /*  options: {
                 curly: true,
                 eqeqeq: true,
                 newcap: true,
@@ -245,9 +230,9 @@ module.exports = function (grunt) {
                 undef: true,
                 boss: true,
                 node: true
-            },
-            globals: {
-                exports: true
+            },*/
+            options: {
+                jshintrc: '.jshintrc'
             },
             files: ['<%= paths.js %>/*.js']
         },

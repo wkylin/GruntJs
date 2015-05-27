@@ -19,8 +19,12 @@ function getCookie(name) {
 }
 
 (function () {
+    var num =1;
     $(".sbar_oper li").hover(function () {
-        $(this).addClass("curr");
+        if(num ==2 ){
+            $(this).addClass("curr");
+        }
+
     }, function () {
         $(this).removeClass("curr");
     });
