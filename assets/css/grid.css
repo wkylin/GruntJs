@@ -4,12 +4,12 @@
  * @overview:
  * @require: null
  */
-.grid {
+.grid{
     width: 100%;
     margin: 0 auto;
 }
 
-.grid-box {
+.grid-box{
     width: 50%;
     height: 50%;
 }

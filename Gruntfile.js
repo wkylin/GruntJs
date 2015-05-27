@@ -332,13 +332,13 @@ module.exports = function (grunt) {
         //按照预定义的排序格式重新排列CSS中定义的属性
         csscomb: {
             options: {
-                config: 'assets/js/libs/csscomb.json'
+                config: 'csscomb.json'
             },
             files: {
                 expand: true,
                 cwd: 'assets/css/',
                 src: ['**/*.css'],
-                dest: 'assets/css/',
+                dest: 'build/css/',
                 ext: '.css'
             }
         },
@@ -479,6 +479,9 @@ module.exports = function (grunt) {
             }
         },
         csslint: {
+            options: {
+                csslintrc: '.csslintrc'
+            },
             dist: {
                 src: ['assets/css/*.css']
             }

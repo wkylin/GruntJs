@@ -40,4 +40,4 @@ GruntJs----基于Node.js的自动化构建工具
 
 ###CSSLint Options
 
-[https://github.com/gruntjs/grunt-contrib-csslint](https://github.com/gruntjs/grunt-contrib-csslint "CSSLint Options")
+[https://github.com/CSSLint/csslint/wiki/Rules](https://github.com/CSSLint/csslint/wiki/Rules "CSSLint Rules")
