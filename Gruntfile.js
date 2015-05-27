@@ -273,12 +273,12 @@ module.exports = function (grunt) {
         },
         scsslint: {
             allFiles: [
-                'assets/css/scss/*.scss',
+                'assets/css/scss/*.scss'
             ],
             options: {
                 bundleExec: true,
                 colorizeOutput: true
-            },
+            }
         },
         compress: {
             main: {
@@ -459,6 +459,9 @@ module.exports = function (grunt) {
             }
         },
         htmlhint: {
+            options: {
+                htmlhintrc: '.htmlhintrc'
+            },
             dist: {
                 src: ['assets/*.html']
             }
