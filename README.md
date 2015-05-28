@@ -4,6 +4,15 @@ GruntJs
 GruntJs----基于Node.js的自动化构建工具
 
 
+环境搭建：
+
+1. install NodeJs: [https://nodejs.org/](https://nodejs.org/ "NodeJS"), [https://iojs.org](https://iojs.org "IOJS")
+
+2. install Ruby: [https://rubygems.org/](https://rubygems.org/ "RubyGems"), RubyGems 镜像:[https://ruby.taobao.org/](https://ruby.taobao.org/ "Ruby TaoBao")
+
+3. install Compass & Sass: [http://thesassway.com/beginner/getting-started-with-sass-and-compass](http://thesassway.com/beginner/getting-started-with-sass-and-compass "Compass")
+
+
 使用方法：
 
 克隆之后在当前目录执行：npm install
@@ -45,3 +54,14 @@ GruntJs----基于Node.js的自动化构建工具
 ###JSHint Options 
 
 [https://github.com/jshint/jshint/blob/master/examples/.jshintrc](https://github.com/jshint/jshint/blob/master/examples/.jshintrc "JSHint Options")
+
+
+###Compass 
+
+[http://thesassway.com/beginner/getting-started-with-sass-and-compass](http://thesassway.com/beginner/getting-started-with-sass-and-compass "install compass")
+
+install Compass and Sass:
+
+    ruby -v 
+    gem update --system && gem install compass
+    

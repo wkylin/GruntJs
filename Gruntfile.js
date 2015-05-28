@@ -121,7 +121,7 @@ module.exports = function (grunt) {
             delHtml: {
                 src: ['<%= buildPaths.html %>']
             },
-            delZip: ['<%= archive %>*.zip'], //先删除先前生成的压缩包
+            delZip: ['<%= archive %>*.zip'],
             delTmp: ['.tmp'],
             delInclude: ['build/assets/include']
         },
@@ -278,6 +278,15 @@ module.exports = function (grunt) {
             options: {
                 bundleExec: true,
                 colorizeOutput: true
+            }
+        },
+        compass: {
+            dist: {
+                options: {
+                    sourcemap:true,
+                    sassDir: 'assets/css/scss',
+                    cssDir: 'assets/css/scss'
+                }
             }
         },
         compress: {
