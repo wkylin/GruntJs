@@ -241,11 +241,11 @@ module.exports = function (grunt) {
                 options: {
                     compress: true,
                     optimization: 2,
-                    banner: '/*! <%= grunt.template.today("yyyy-mm-dd") %>' + ' Licensed <%= pkg.license %> */\n'
-                    //cleancss: true,
-                    //sourceMap: true,
-                    //sourceMapFilename: "<%= paths.css %>/source.map",
-                    //sourceMapBasepath: "<%= paths.css %>"
+                    banner: '/*! <%= grunt.template.today("yyyy-mm-dd") %>' + ' Licensed <%= pkg.license %> */ \n',
+                    cleancss: true,
+                    sourceMap: true,
+                    sourceMapFilename: "<%= paths.css %>/source.map",
+                    sourceMapBasepath: "<%= paths.css %>"
                 },
 //                files:{
 //                    '<%= paths.css %>/source.css':['<%= paths.less %>/source.less','<%= paths.less %>/source2.less']
