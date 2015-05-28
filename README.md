@@ -20,11 +20,11 @@ GruntJs----基于Node.js的自动化构建工具
 
 在线演示文档：
 
-<http://wkylin.github.io/assets/GruntJsPpt/gruntJs.html>
+[Grunt Doc](http://wkylin.github.io/assets/gruntjs/gruntjs.html "grunt doc")
 
 参考资料：
 
-<http://pan.baidu.com/s/1jGLqUiE>
+[百度云](http://pan.baidu.com/s/1jGLqUiE "Grunt zip")
 
 
 ###Nodejs领域: 
