@@ -208,6 +208,13 @@ module.exports = function (grunt) {
                 ]
             }
         },
+        sprite: {
+            all: {
+                src: 'assets/image/*.png',
+                dest: 'assets/image/sprites.png',
+                destCss: 'assets/css/sprites.css'
+            }
+        },
         jscoverage: {
             src: {
                 expand: true,

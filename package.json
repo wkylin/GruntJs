@@ -56,6 +56,7 @@
     "grunt-newer": "^1.1.0",
     "grunt-perfbudget": "^0.1.6",
     "grunt-scss-lint": "^0.3.6",
+    "grunt-spritesmith": "^4.6.1",
     "grunt-svgstore": "^0.5.0",
     "grunt-uncss": "^0.4.2",
     "grunt-usemin": "^2.6.2",
