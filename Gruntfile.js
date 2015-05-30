@@ -289,6 +289,7 @@ module.exports = function (grunt) {
                 }
             }
         },
+
         compress: {
             main: {
                 options: {
@@ -300,6 +301,7 @@ module.exports = function (grunt) {
                 dest: ''
             }
         },
+
         //grunt-cssc整合CSS文件样式规则，最大限度削减重复内容
         cssc: {
             build: {
@@ -346,6 +348,16 @@ module.exports = function (grunt) {
                 files: {
                     '<%= paths.css %>/tidy.css': ['<%= paths.assets %>/grunt.html', '<%= paths.assets %>/requirejs.html']
                 }
+            }
+        },
+
+        //
+        csscss:{
+            options: {
+                outputJson: true
+            },
+            files: {
+                'build/output.json': ['assets/css/*.css']
             }
         },
         filerev: {
