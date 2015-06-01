@@ -291,8 +291,9 @@ module.exports = function (grunt) {
             dist: {
                 options: {
                     sourcemap:true,
-                    sassDir: 'assets/css/scss',
-                    cssDir: 'assets/css/scss'
+                    config:"config.rb"
+                    //sassDir: 'assets/css/scss',
+                    //cssDir: 'assets/css/scss'
                 }
             }
         },
