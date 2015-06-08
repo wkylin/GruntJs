@@ -201,9 +201,8 @@ module.exports = function (grunt) {
                     optimizationLevel: 4
                 },
                 /*files: {
-                 'build/image/a.png': 'assets/image/a.png',
-                 'build/image/b.png': 'assets/image/b.png',
-                 'build/image/c.png': 'assets/image/c.png'
+                 'build/image/banner.png': 'assets/image/banner.png',
+                 'build/image/qd.png': 'assets/image/qd.png'
                  }*/
                 files: [
                     {
