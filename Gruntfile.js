@@ -155,7 +155,28 @@ module.exports = function (grunt) {
             }
         },
         usemin: {
-            html: ['build/assets/*.html']
+            html: ['build/assets/*.html'],
+            css: ['build/assets/{,*/}*.css'],
+            options: {
+                assetsDirs: ['build/assets/', 'build/assets/images']
+            }
+        },
+        filerev: {
+            options: {
+                algorithm: 'md5',
+                length: 8
+            },
+            dist: {
+                files: [
+                    {
+                        src: [
+                            'build/**/*.css',
+                            'build/**/*.js',
+                            'build/**/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+                        ]
+                    }
+                ]
+            }
         },
         htmlmin: {
             build: {
@@ -354,24 +375,7 @@ module.exports = function (grunt) {
                 'build/output.json': ['assets/css/*.css']
             }
         },
-        filerev: {
-            options: {
-                algorithm: 'md5',
-                length: 8
-            },
-            dist: {
-                files: [
-                    {
-                        src: [
-//                            '<%= paths.img %>/**/*.{jpg,jpeg,gif,png}',
-//                            '<%= paths.css %>/**/*.css'
-                            'build/**/*.css',
-                            'build/**/*.js'
-                        ]
-                    }
-                ]
-            }
-        },
+
         perfbudget: {
             dist: {
                 options: {
@@ -449,9 +453,6 @@ module.exports = function (grunt) {
         },
         browserSync: {
             bsFiles: {
-                //src : 'build/assets/css/*.css'
-                //src : 'assets/**/*.*'
-                //src: 'build/assets/**'
                 src: 'assets/**'
             },
             options: {
@@ -541,5 +542,5 @@ module.exports = function (grunt) {
     grunt.registerTask('sync',['browserSync']);
 
     //Prd
-    grunt.registerTask('build', ['clean:build', 'copy:copyHtml', 'includereplace', 'useminPrepare', 'concat:generated', 'uglify:generated', 'cssmin:generated', 'filerev', 'usemin', 'clean:delTmp', 'clean:delInclude']);
+    grunt.registerTask('build', ['clean:build', 'copy:copyHtml', 'copy:images', 'includereplace', 'useminPrepare', 'concat:generated', 'uglify:generated', 'cssmin:generated', 'filerev', 'usemin', 'clean:delTmp', 'clean:delInclude']);
 };
