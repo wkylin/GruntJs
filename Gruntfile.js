@@ -479,7 +479,7 @@ module.exports = function (grunt) {
                 dest: 'build/'
             }
         },
-        htmlhint: {
+        htmlHint: {
             options: {
                 htmlhintrc: '.htmlhintrc'
             },
@@ -487,7 +487,7 @@ module.exports = function (grunt) {
                 src: ['assets/*.html']
             }
         },
-        csslint: {
+        cssLint: {
             options: {
                 csslintrc: '.csslintrc'
             },
@@ -542,7 +542,7 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['build']);
 
     // 自定义任务
-    grunt.registerTask('buildcss', ['csscomb','cssmin']);
+    grunt.registerTask('buildCss', ['csscomb','cssmin']);
     grunt.registerTask('live', [ 'connect', 'watch']);
     grunt.registerTask('sync',['browserSync']);
 
