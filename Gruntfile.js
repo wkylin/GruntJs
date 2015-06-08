@@ -479,7 +479,7 @@ module.exports = function (grunt) {
                 dest: 'build/'
             }
         },
-        htmlHint: {
+        htmlhint: {
             options: {
                 htmlhintrc: '.htmlhintrc'
             },
@@ -523,10 +523,7 @@ module.exports = function (grunt) {
              files: ['assets/css*//*.css'],
              tasks: ['buildcss']
              },
-             concat: {
-             files: ['assets/js*//*.js'],
-             tasks: ['concat']
-             },*/
+             */
             prd: {
                 files: ['assets/**/*.*'],
                 tasks: ['copy:copyHtml', 'includereplace', 'useminPrepare', 'concat:generated', 'uglify:generated', 'cssmin:generated', 'usemin', 'clean:delTmp', 'clean:delInclude']
@@ -545,6 +542,7 @@ module.exports = function (grunt) {
     grunt.registerTask('buildCss', ['csscomb','cssmin']);
     grunt.registerTask('live', [ 'connect', 'watch']);
     grunt.registerTask('sync',['browserSync']);
+
 
     //Prd
     grunt.registerTask('build', ['clean:build', 'copy:copyHtml', 'copy:images', 'includereplace', 'useminPrepare', 'concat:generated', 'uglify:generated', 'cssmin:generated', 'filerev', 'usemin', 'clean:delTmp', 'clean:delInclude']);
