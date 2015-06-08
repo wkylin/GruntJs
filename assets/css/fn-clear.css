@@ -31,8 +31,20 @@
 
 .text-color{
     color: #ffffff;
-    /*color:#fff;*/
-    /*background-color: #010;*/
-    background-color: #008c96;
+    background-color: #001100;
+    /*color: #fff;*/
+    /*background-color: #008c96;*/
 }
 
+form{
+    margin-bottom: 10px;
+}
+
+form input{
+    border: 1px solid #dddddd;
+    padding-left: 10px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 3px;
+    color: #f03d25;
+}

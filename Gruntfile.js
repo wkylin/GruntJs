@@ -23,24 +23,10 @@ module.exports = function (grunt) {
             js: 'build/js',
             img: 'build/assets/image'
         },
-        buildType: 'Build',
 
-        //读取package.json的内容，形成个json数据
+        //读取package.json的内容，形成json数据
         pkg: grunt.file.readJSON('package.json'),
         archive: grunt.option('name') || 'GruntJs',//此处可根据自己的需求修改
-
-        //config
-        copyFiles: {
-            options: {
-                workingDirectory: 'working',
-                manifest: [
-                    'assets/grunt.html',
-                    'assets/css/base.css',
-                    'assets/js/docApp.js'
-                ]
-
-            }
-        },
 
         //Task配置
         jsonlint: {
@@ -547,12 +533,13 @@ module.exports = function (grunt) {
     });
 
     // 默认执行的任务
-    grunt.registerTask('default', ['live', 'prd']);
+    grunt.registerTask('default', ['build']);
 
     // 自定义任务
-    grunt.registerTask('buildcss', ['cssmin']);
-    grunt.registerTask('live', ['browserSync', 'connect', 'watch']);
+    grunt.registerTask('buildcss', ['csscomb','cssmin']);
+    grunt.registerTask('live', [ 'connect', 'watch']);
+    grunt.registerTask('sync',['browserSync']);
 
     //Prd
-    grunt.registerTask('prd', ['clean:build', 'copy:copyHtml', 'includereplace', 'useminPrepare', 'concat:generated', 'uglify:generated', 'cssmin:generated', 'filerev', 'usemin', 'clean:delTmp', 'clean:delInclude']);
+    grunt.registerTask('build', ['clean:build', 'copy:copyHtml', 'includereplace', 'useminPrepare', 'concat:generated', 'uglify:generated', 'cssmin:generated', 'filerev', 'usemin', 'clean:delTmp', 'clean:delInclude']);
 };
