@@ -73,3 +73,11 @@ install Compass and Sass:
 
 
 
+###Problem
+
+D:\github\GruntJS\Gruntfile.js sprite:all
+
+Running "sprite:all" (sprite) task
+
+Fatal error: Unsupported interlace method.
+

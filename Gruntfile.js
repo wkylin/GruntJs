@@ -144,7 +144,13 @@ module.exports = function (grunt) {
             },
             copyHtml: {
                 files: [
-                    {expand: true, src: ['assets/**/*.html'], dest: 'build'}
+                    //{expand: true, src: ['assets/**/*.html'], dest: 'build'}
+                    {expand: true, src: ['assets/**/grunt.html'], dest: 'build'}
+                ]
+            },
+            copyJs:{
+                files:[
+                    {expand: true, src: ['<%= paths.js %>/**'], dest: 'build/'}
                 ]
             }
         },
