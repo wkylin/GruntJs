@@ -526,7 +526,16 @@ module.exports = function (grunt) {
              */
             prd: {
                 files: ['assets/**/*.*'],
-                tasks: ['copy:copyHtml', 'includereplace', 'useminPrepare', 'concat:generated', 'uglify:generated', 'cssmin:generated', 'usemin', 'clean:delTmp', 'clean:delInclude']
+                tasks: ['copy:copyHtml',
+                    'includereplace',
+                    'useminPrepare',
+                    'concat:generated',
+                    'uglify:generated',
+                    'cssmin:generated',
+                    'usemin',
+                    'clean:delTmp',
+                    'clean:delInclude'
+                ]
             },
             allJs: {
                 files: ['assets/js/**/*.js'],
@@ -545,5 +554,18 @@ module.exports = function (grunt) {
 
 
     //Prd
-    grunt.registerTask('build', ['clean:build', 'copy:copyHtml', 'copy:images', 'includereplace', 'useminPrepare', 'concat:generated', 'uglify:generated', 'cssmin:generated', 'filerev', 'usemin', 'clean:delTmp', 'clean:delInclude']);
+    grunt.registerTask('build', [
+        'clean:build',
+        'copy:copyHtml',
+        'copy:images',
+        'includereplace',
+        'useminPrepare',
+        'concat:generated',
+        'uglify:generated',
+        'cssmin:generated',
+        'filerev',
+        'usemin',
+        'clean:delTmp',
+        'clean:delInclude'
+    ]);
 };
