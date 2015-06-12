@@ -1,11 +1,8 @@
 module.exports = function (grunt) {
 
-    //使用 matchdep，可以自动载入所有任务。
-    // require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
-
     require('load-grunt-tasks')(grunt);
-
     require('time-grunt')(grunt);
+
     // 构建任务配置
     grunt.initConfig({
 
@@ -24,9 +21,8 @@ module.exports = function (grunt) {
             img: 'build/assets/image'
         },
 
-        //读取package.json的内容，形成json数据
         pkg: grunt.file.readJSON('package.json'),
-        archive: grunt.option('name') || 'GruntJs',//此处可根据自己的需求修改
+        archive: grunt.option('name') || 'GruntJs',
 
         //Task配置
         jsonlint: {
@@ -91,98 +87,37 @@ module.exports = function (grunt) {
                 //]
             }
         },
-        clean: {
-            build: {
-                src: ['build']
-            },
-            delDoc: {
-                src: ['docs']
-            },
-            delCss: {
-                src: ['<%= buildPaths.css %>']
-            },
-            delJs: {
-                src: ['<%= buildPaths.js %>']
-            },
-            delHtml: {
-                src: ['<%= buildPaths.html %>']
-            },
-            delZip: ['<%= archive %>*.zip'],
-            delTmp: ['.tmp'],
-            delInclude: ['build/assets/include']
-        },
-        concat: {
-            build: {
-                options: {
-                    separator: '\n'
-                },
-                src: ['<%= paths.js %>/*.js'],
-                dest: '<%= buildPaths.js %>/concatIndex.js'
-            }
-        },
-        copy: {
-            main: {
-                files: [
-                    {expand: true, src: ['<%= paths.assets %>/*.html'], dest: 'build/'},
-                    {expand: true, src: ['<%= paths.css %>/*.css'], dest: 'build/'},
-                    {expand: true, src: ['<%= paths.img %>/**'], dest: 'build/'},
-                    {expand: true, src: ['<%= paths.js %>/**'], dest: 'build/'},
-                    {
-                        expand: true,
-                        src: ['*', '!build', '!test', '!.gitignore', '!.DS_Store', '!Gruntfile.js', '!package.json', '!node_modules/**', '!go.sh', '!.ftppass', '!<%= archive %>*.zip'],
-                        dest: 'build/'
-                    }
-                ]
-            },
-            images: {
-                expand: true,
-                cwd: '<%= paths.img %>',
-                src: ['**', '!github.png'],
-                dest: '<%= buildPaths.img %>',
-                flatten: true,
-                filter: 'isFile'
-            },
-            copyHtml: {
-                files: [
-                    //{expand: true, src: ['assets/**/*.html'], dest: 'build'}
-                    {expand: true, src: ['assets/**/grunt.html'], dest: 'build'}
-                ]
-            },
-            copyJs:{
-                files:[
-                    {expand: true, src: ['<%= paths.js %>/**'], dest: 'build/'}
-                ]
-            }
-        },
-        useminPrepare: {
-            html: ['assets/*.html'],
+        htmlhint: {
             options: {
-                dest: 'build/assets'
-            }
-        },
-        usemin: {
-            html: ['build/assets/*.html'],
-            css: ['build/assets/{,*/}*.css'],
-            options: {
-                assetsDirs: ['build/assets/', 'build/assets/images']
-            }
-        },
-        filerev: {
-            options: {
-                algorithm: 'md5',
-                length: 8
+                htmlhintrc: '.htmlhintrc'
             },
             dist: {
-                files: [
-                    {
-                        src: [
-                            'build/**/*.css',
-                            'build/**/*.js',
-                            'build/**/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-                        ]
-                    }
-                ]
+                src: ['assets/*.html']
             }
+        },
+        cssLint: {
+            options: {
+                csslintrc: '.csslintrc'
+            },
+            dist: {
+                src: ['assets/css/*.css']
+            }
+        },
+        jshint: {
+            /*  options: {
+             curly: true,
+             eqeqeq: true,
+             newcap: true,
+             noarg: true,
+             sub: true,
+             undef: true,
+             boss: true,
+             node: true
+             },*/
+            options: {
+                jshintrc: '.jshintrc'
+            },
+            files: ['<%= paths.js %>/*.js']
         },
         htmlmin: {
             build: {
@@ -220,40 +155,14 @@ module.exports = function (grunt) {
                 ]
             }
         },
-        sprite: {
-            all: {
-                src: 'assets/image/*.png',
-                dest: 'assets/image/sprites.png',
-                destCss: 'assets/css/sprites.css'
+        concat: {
+            build: {
+                options: {
+                    separator: '\n'
+                },
+                src: ['<%= paths.js %>/*.js'],
+                dest: '<%= buildPaths.js %>/concatIndex.js'
             }
-        },
-        jscoverage: {
-            src: {
-                expand: true,
-                cwd: 'assets/',
-                src: ['**/*.js'],
-                dest: 'coverage/',
-                ext: '.js'
-            },
-            options: {
-                // custom options
-            }
-        },
-        jshint: {
-          /*  options: {
-                curly: true,
-                eqeqeq: true,
-                newcap: true,
-                noarg: true,
-                sub: true,
-                undef: true,
-                boss: true,
-                node: true
-            },*/
-            options: {
-                jshintrc: '.jshintrc'
-            },
-            files: ['<%= paths.js %>/*.js']
         },
         less: {
             build: {
@@ -281,8 +190,8 @@ module.exports = function (grunt) {
             }
         },
         sass: {
-            options:{
-              style: 'expanded'
+            options: {
+                style: 'expanded'
             },
             dist: {
                 files: {
@@ -302,14 +211,111 @@ module.exports = function (grunt) {
         compass: {
             dist: {
                 options: {
-                    sourcemap:true,
-                    config:"config.rb"
+                    sourcemap: true,
+                    config: "config.rb"
                     //sassDir: 'assets/css/scss',
                     //cssDir: 'assets/css/scss'
                 }
             }
         },
+        copy: {
+            main: {
+                files: [
+                    {expand: true, src: ['<%= paths.assets %>/*.html'], dest: 'build/'},
+                    {expand: true, src: ['<%= paths.css %>/*.css'], dest: 'build/'},
+                    {expand: true, src: ['<%= paths.img %>/**'], dest: 'build/'},
+                    {expand: true, src: ['<%= paths.js %>/**'], dest: 'build/'},
+                    {
+                        expand: true,
+                        src: ['*', '!build', '!test', '!.gitignore', '!.DS_Store', '!Gruntfile.js', '!package.json', '!node_modules/**', '!go.sh', '!.ftppass', '!<%= archive %>*.zip'],
+                        dest: 'build/'
+                    }
+                ]
+            },
+            images: {
+                expand: true,
+                cwd: '<%= paths.img %>',
+                src: ['**', '!github.png'],
+                dest: '<%= buildPaths.img %>',
+                flatten: true,
+                filter: 'isFile'
+            },
+            copyHtml: {
+                files: [
+                    //{expand: true, src: ['assets/**/*.html'], dest: 'build'}
+                    {expand: true, src: ['assets/**/grunt.html'], dest: 'build'}
+                ]
+            },
+            copyJs:{
+                files:[
+                    {expand: true, src: ['<%= paths.js %>/**'], dest: 'build/'}
+                ]
+            }
+        },
 
+        useminPrepare: {
+            html: ['assets/*.html'],
+            options: {
+                dest: 'build/assets'
+            }
+        },
+        usemin: {
+            html: ['build/assets/*.html'],
+            css: ['build/assets/{,*/}*.css'],
+            options: {
+                assetsDirs: ['build/assets/', 'build/assets/images']
+            }
+        },
+        filerev: {
+            options: {
+                algorithm: 'md5',
+                length: 8
+            },
+            dist: {
+                files: [
+                    {
+                        src: [
+                            'build/**/*.css',
+                            'build/**/*.js',
+                            'build/**/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+                        ]
+                    }
+                ]
+            }
+        },
+
+        jscoverage: {
+            src: {
+                expand: true,
+                cwd: 'assets/',
+                src: ['**/*.js'],
+                dest: 'coverage/',
+                ext: '.js'
+            },
+            options: {
+                // custom options
+            }
+        },
+        clean: {
+            build: {
+                src: ['build']
+            },
+            delDoc: {
+                src: ['docs']
+            },
+            delCss: {
+                src: ['<%= buildPaths.css %>']
+            },
+            delJs: {
+                src: ['<%= buildPaths.js %>']
+            },
+            delHtml: {
+                src: ['<%= buildPaths.html %>']
+            },
+            delZip: ['<%= archive %>*.zip'],
+            delTmp: ['.tmp'],
+            delInclude: ['build/assets/include']
+        },
         compress: {
             main: {
                 options: {
@@ -321,8 +327,13 @@ module.exports = function (grunt) {
                 dest: ''
             }
         },
-
-        //grunt-cssc整合CSS文件样式规则，最大限度削减重复内容
+        sprite: {
+            all: {
+                src: 'assets/image/*.png',
+                dest: 'assets/image/sprites.png',
+                destCss: 'assets/css/sprites.css'
+            }
+        },
         cssc: {
             build: {
                 options: {
@@ -335,7 +346,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-
         csso: {
             build: {
                 expand: true,
@@ -345,7 +355,6 @@ module.exports = function (grunt) {
                 ext: '.min.css'
             }
         },
-        //按照预定义的排序格式重新排列CSS中定义的属性
         csscomb: {
             options: {
                 config: 'csscomb.json'
@@ -370,8 +379,6 @@ module.exports = function (grunt) {
                 }
             }
         },
-
-        //
         csscss:{
             options: {
                 outputJson: true
@@ -456,6 +463,7 @@ module.exports = function (grunt) {
 
             }
         },
+
         browserSync: {
             bsFiles: {
                 src: 'assets/**'
@@ -477,22 +485,6 @@ module.exports = function (grunt) {
                 },
                 src: 'assets/grunt.html',
                 dest: 'build/'
-            }
-        },
-        htmlhint: {
-            options: {
-                htmlhintrc: '.htmlhintrc'
-            },
-            dist: {
-                src: ['assets/*.html']
-            }
-        },
-        cssLint: {
-            options: {
-                csslintrc: '.csslintrc'
-            },
-            dist: {
-                src: ['assets/css/*.css']
             }
         },
 
@@ -553,7 +545,7 @@ module.exports = function (grunt) {
     grunt.registerTask('sync',['browserSync']);
 
 
-    //Prd
+    //Build
     grunt.registerTask('build', [
         'clean:build',
         'copy:copyHtml',

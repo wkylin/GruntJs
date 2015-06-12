@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css/sprites.css" media="all" />
     <!-- endbuild -->
 
-    <!-- build:css css/base.css -->
+    <!-- build:css css/index.css -->
     <link rel="stylesheet" type="text/css" href="css/source.css" media="all" />
     <link rel="stylesheet" type="text/css" href="css/grid.css" media="all" />
     <!-- endbuild -->
@@ -31,25 +31,28 @@
     </form>
 
     <p>IMG</p>
-    <img src="image/followed.png" alt="" />
+    <img src="image/followed.png" />
 
     <p>样式图片</p>
     <div class="icon-follow"></div>
 
+    <p>include html</p>
     <div class="fn-include"> @@include('include/message.html', {"name": "Grunt"}) </div>
 </div>
+
 <!-- build:js js/aio.min.js -->
 <script type="text/javascript" src="js/utils/testPrdAo.js"></script>
-
 <script type="text/javascript" src="js/utils/testPrdBo.js"></script>
-
 <!-- endbuild -->
+
 <!-- weinre test -->
 <!-- <script src="http://10.35.5.147:8080/target/target-script-min.js#anonymous"></script> -->
+
 <!-- build:js js/pro.min.js -->
 <script type="text/javascript" src="js/utils/prdAo.js"></script>
 <script type="text/javascript" src="js/utils/prdBo.js"></script>
 <script type="text/javascript" src="js/utils/fn.js"></script>
 <!-- endbuild -->
+
 </body>
 </html>
