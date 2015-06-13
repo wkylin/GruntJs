@@ -542,7 +542,7 @@ module.exports = function (grunt) {
     // 自定义任务
     grunt.registerTask('buildCss', ['csscomb','cssmin']);
     grunt.registerTask('live', [ 'connect', 'watch']);
-    grunt.registerTask('sync',['browserSync']);
+    grunt.registerTask('sync',['browserSync', 'watch']);
 
 
     //Build
