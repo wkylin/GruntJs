@@ -246,8 +246,8 @@ module.exports = function (grunt) {
                     {expand: true, src: ['assets/**/grunt.html'], dest: 'build'}
                 ]
             },
-            copyJs:{
-                files:[
+            copyJs: {
+                files: [
                     {expand: true, src: ['<%= paths.js %>/**'], dest: 'build/'}
                 ]
             }
@@ -379,7 +379,7 @@ module.exports = function (grunt) {
                 }
             }
         },
-        csscss:{
+        csscss: {
             options: {
                 outputJson: true
             },
@@ -540,9 +540,9 @@ module.exports = function (grunt) {
     grunt.registerTask('default', ['build']);
 
     // 自定义任务
-    grunt.registerTask('buildCss', ['csscomb','cssmin']);
-    grunt.registerTask('live', [ 'connect', 'watch']);
-    grunt.registerTask('sync',['browserSync', 'watch']);
+    grunt.registerTask('buildCss', ['csscomb', 'cssmin']);
+    grunt.registerTask('live', ['connect', 'watch']);
+    grunt.registerTask('sync', ['browserSync', 'watch']);
 
 
     //Build
